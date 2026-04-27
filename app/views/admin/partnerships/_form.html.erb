@@ -1,0 +1,22 @@
+<%= form_with(model: [:admin, partnership], class: "row g-3") do |f| %>
+  <div class="col-md-6">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="col-md-6">
+    <%= f.label :link, class: "form-label" %>
+    <%= f.url_field :link, class: "form-control", placeholder: "https://..." %>
+  </div>
+  <div class="col-12">
+    <%= f.label :logo, class: "form-label" %>
+    <%= f.file_field :logo, class: "form-control" %>
+  </div>
+  <div class="col-12">
+    <%= f.label :description, class: "form-label" %>
+    <%= f.rich_text_area :description, class: "form-control", style: "min-height: 150px;" %>
+  </div>
+  <div class="col-12 mt-4">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_partnerships_path, class: "btn btn-outline-secondary ms-2" %>
+  </div>
+<% end %>

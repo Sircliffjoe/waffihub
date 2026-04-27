@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= @page_title ? "#{@page_title} | WaffiHub" : "WaffiHub - Innovation & Tech Center" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "WaffiHub Limited is a premier innovation hub in Warri, Delta State, providing co-working spaces, incubation, and tech training." %>">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (ensure config/routes.rb has the route) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path %>
+
+    <link rel="icon" type="image/png" href="<%= asset_path('icon.png') %>">
+    
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --primary-color: #34495E;
+        --secondary-color: #F8F9FA;
+        --accent-color: #3498DB;
+        --body-font: 'Inter', sans-serif;
+        --heading-font: 'Outfit', sans-serif;
+      }
+      body { font-family: var(--body-font); color: #333; }
+      h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); font-weight: 700; color: #1A1A1A; }
+      .bg-primary-custom { background-color: var(--primary-color) !important; }
+      .text-primary-custom { color: var(--primary-color) !important; }
+      .navbar-brand { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+      .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+      .btn-primary:hover { background-color: #2C3E50; border-color: #2C3E50; }
+    </style>
+  </head>
+
+  <body>
+    <%= render "shared/navbar" %>
+
+    <main>
+      <% if notice %>
+        <div class="alert alert-info border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <%= render "shared/footer" %>
+
+    <script>
+      document.addEventListener('turbo:load', () => {
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out'
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<h1 class="h3 mb-4">Program Enrollments</h1>
+
+<div class="card shadow-sm border-0 text-dark">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>User</th>
+          <th>Program</th>
+          <th>Enrollment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @enrollments.each do |enrollment| %>
+          <tr>
+            <td><%= enrollment.user.email %></td>
+            <td><%= enrollment.program.title %></td>
+            <td><%= enrollment.created_at.strftime("%B %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

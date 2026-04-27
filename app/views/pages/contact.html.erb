@@ -1,0 +1,147 @@
+<%# 1. PROFESSIONAL HERO SECTION (KEPT AS REQUESTED) %>
+<section class="position-relative py-9 py-lg-10 overflow-hidden bg-primary-custom text-white">
+  <div class="position-absolute top-0 start-0 w-100 h-100 opacity-50">
+    <%= image_tag "about_hero.png", class: "w-100 h-100", style: "object-fit: cover; filter: brightness(0.4);" %>
+  </div>
+  <div class="container position-relative z-1 py-9">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h6 class="text-white-50 fw-bold text-uppercase ls-wide mb-3" style="margin-top:50px;">Connect With Us</h6>
+        <h1 class="display-3 fw-bold mb-4 text-white">Get In <span class="text-info">Touch</span>.</h1>
+        <p class="lead text-white-50" style="margin-bottom:50px;">We'd love to hear from you. Reach out today to start your digital journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 2. CONTACT DASHBOARD %>
+<section class="py-8 bg-white overflow-hidden">
+  <div class="container">
+    <div class="row g-5">
+      <%# A. INFO COLUMN %>
+      <div class="col-lg-5" data-aos="fade-right">
+        <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Reach Out</h6>
+        <h2 class="display-5 fw-bold mb-5">Talk to our Team</h2>
+        
+        <div class="d-grid gap-4">
+          <% [
+            { icon: "geo-alt", title: "Visit the Hub", desc: "WaffiHub Square, Plot 12, Warri-Sapele Road, Effurun, Delta State.", link: "#" },
+            { icon: "envelope-open", title: "General Inquiries", desc: "hello@waffihub.com", link: "mailto:hello@waffihub.com" },
+            { icon: "headset", title: "Support Line", desc: "+234 (0) 800 WAFFI HUB", link: "tel:+234800WAFFIHUB" }
+          ].each do |item| %>
+            <div class="d-flex gap-4 p-4 bg-light rounded-5 transition-hover">
+              <div class="icon-box-sm bg-white text-primary-custom shadow-sm rounded-4 flex-shrink-0">
+                <i class="bi bi-<%= item[:icon] %>"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1"><%= item[:title] %></h5>
+                <p class="text-muted small mb-0"><%= item[:desc] %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mt-7">
+          <h6 class="fw-bold text-uppercase ls-wide mb-4 small opacity-50">Follow Our Journey</h6>
+          <div class="d-flex gap-3">
+            <% %w[facebook twitter-x instagram linkedin].each do |platform| %>
+              <a href="#" class="icon-box-sm bg-primary-custom text-white rounded-circle shadow-sm transition-hover">
+                <i class="bi bi-<%= platform %>"></i>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%# B. FORM COLUMN %>
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="card border-0 shadow-2xl rounded-5 p-5 bg-white">
+          <h3 class="fw-bold mb-4">Send a Message</h3>
+          <%= form_with model: @inquiry, url: inquiries_path, class: "row g-4" do |f| %>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <%= f.text_field :name, class: "form-control border-0 bg-light rounded-pill px-4", id: "floatingName", placeholder: "Name", required: true %>
+                <label for="floatingName" class="ps-4">Your Name</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <%= f.email_field :email, class: "form-control border-0 bg-light rounded-pill px-4", id: "floatingEmail", placeholder: "Email", required: true %>
+                <label for="floatingEmail" class="ps-4">Email Address</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <%= f.text_field :subject, class: "form-control border-0 bg-light rounded-pill px-4", id: "floatingSubject", placeholder: "Subject", required: true %>
+                <label for="floatingSubject" class="ps-4">Reason for Inquiry</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <%= f.text_area :message, class: "form-control border-0 bg-light rounded-5 px-4 pt-5", id: "floatingMessage", placeholder: "Message", style: "height: 180px", required: true %>
+                <label for="floatingMessage" class="ps-4 pt-4">How can we help you?</label>
+              </div>
+            </div>
+            <div class="col-12 mt-5">
+              <%= f.submit "Send Inquiry Now", class: "btn btn-primary d-block w-100 py-3 rounded-pill fw-bold shadow-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 3. LOCATION & HOURS %>
+<section class="py-10 bg-light overflow-hidden">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+        <div class="rounded-5 overflow-hidden shadow-2xl p-2 bg-white">
+          <%# Placeholder for Google Map - Proactive design %>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127025.234321!2d5.6983344!3d5.544444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1041ad6e6a123457%3A0x1234567890abcdef!2sWarri%2C%20Delta%20State!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng" 
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="rounded-4">
+          </iframe>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+        <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Visit the Hub</h6>
+        <h2 class="display-5 fw-bold mb-4">Located in the Heart of Delta</h2>
+        <p class="lead text-muted mb-5">Our physical presence drives local innovation. We are open for coworking, training sessions, and strategic consultations.</p>
+        
+        <div class="p-5 bg-white shadow-sm rounded-5">
+          <h5 class="fw-bold mb-4"><i class="bi bi-clock me-2 text-primary-custom"></i> Operational Hours</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+              <span class="fw-semibold text-muted">Monday - Friday</span>
+              <span class="fw-bold text-primary-custom">08:00 AM - 06:00 PM</span>
+            </li>
+            <li class="d-flex justify-content-between">
+              <span class="fw-semibold text-muted">Saturday</span>
+              <span class="fw-bold text-primary-custom">10:00 AM - 04:00 PM</span>
+            </li>
+          </ul>
+          <div class="mt-4 p-3 bg-light rounded-4 extra-small text-muted text-center fw-bold">
+            <i class="bi bi-info-circle me-1"></i> Closed on Sundays and Public Holidays.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shadow-2xl { shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+    color: var(--bs-primary-custom);
+  }
+</style>

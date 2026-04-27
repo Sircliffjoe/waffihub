@@ -1,0 +1,110 @@
+<div class="row align-items-center pt-3 pb-2 mb-4 border-bottom g-3">
+  <div class="col-md-auto">
+    <h1 class="h2 fw-bold mb-0">Management Center</h1>
+    <p class="text-muted small mb-0">Overview of WaffiHub digital operations</p>
+  </div>
+  <div class="col-md-auto ms-auto d-flex gap-2">
+    <%= link_to "View Public Site", root_path, target: "_blank", class: "btn btn-outline-secondary btn-sm rounded-pill px-3" %>
+    <%= link_to "Create New Post", new_admin_post_path, class: "btn btn-primary btn-sm rounded-pill px-3 shadow-sm" %>
+  </div>
+</div>
+
+<%# 1. CORE METRICS GRID %>
+<div class="row g-4 mb-5">
+  <% [
+    { label: "Talents Registered", icon: "people", count: @stats[:enrollments], color: "primary", link: admin_enrollments_path },
+    { label: "Active Programs", icon: "mortarboard", count: @stats[:programs], color: "success", link: admin_programs_path },
+    { label: "Recent Inquiries", icon: "envelope-exclamation", count: @stats[:inquiries], color: "warning", link: admin_inquiries_path },
+    { label: "Hub Updates", icon: "journal-text", count: @stats[:posts], color: "info", link: admin_posts_path }
+  ].each do |card| %>
+    <div class="col-lg-3 col-md-6">
+      <div class="card border-0 shadow-sm rounded-4 h-100 transition-hover">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="icon-box-sm bg-light text-<%= card[:color] %> rounded-3">
+              <i class="bi bi-<%= card[:icon] %>"></i>
+            </div>
+            <%= link_to card[:link], class: "text-muted small text-decoration-none" do %>
+              Manage <i class="bi bi-arrow-right small"></i>
+            <% end %>
+          </div>
+          <h2 class="fw-bold mb-1"><%= card[:count] %></h2>
+          <p class="text-muted extra-small text-uppercase fw-bold ls-wide mb-0"><%= card[:label] %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row g-5">
+  <%# 2. RECENT ENROLLMENTS %>
+  <div class="col-lg-7">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-header bg-white py-3 border-0">
+        <h5 class="fw-bold mb-0">Recent Program Enrollments</h5>
+      </div>
+      <div class="table-responsive px-4 pb-4">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light">
+            <tr>
+              <th class="border-0 small text-uppercase">Student</th>
+              <th class="border-0 small text-uppercase">Program</th>
+              <th class="border-0 small text-uppercase">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recent_enrollments.each do |enrollment| %>
+              <tr>
+                <td><div class="fw-bold small"><%= enrollment.user.email %></div></td>
+                <td><span class="badge bg-light text-dark border small"><%= enrollment.program.title %></span></td>
+                <td class="text-muted small"><%= enrollment.created_at.strftime("%b %d, %Y") %></td>
+              </tr>
+            <% end %>
+            <% if @recent_enrollments.empty? %>
+              <tr><td colspan="3" class="text-center py-4 text-muted small">No recent enrollments found.</td></tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <%# 3. QUICK ACTIONS & RECENT INQUIRIES %>
+  <div class="col-lg-5">
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+      <div class="card-header bg-white py-3 border-0 d-flex justify-content-between">
+        <h5 class="fw-bold mb-0">Latest Inquiries</h5>
+        <span class="badge bg-danger rounded-pill"><%= @stats[:inquiries] %> total</span>
+      </div>
+      <div class="list-group list-group-flush px-4 pb-4">
+        <% @recent_inquiries.each do |inquiry| %>
+           <div class="list-group-item px-0 border-0 mb-2">
+             <div class="d-flex justify-content-between align-items-center mb-1">
+               <h6 class="fw-bold mb-0 small"><%= inquiry.name %></h6>
+               <span class="extra-small text-muted"><%= time_ago_in_words(inquiry.created_at) %> ago</span>
+             </div>
+             <p class="text-muted extra-small mb-1"><%= truncate(inquiry.message, length: 80) %></p>
+             <%= link_to "Respond", admin_inquiry_path(inquiry), class: "extra-small text-primary-custom text-decoration-none fw-bold" %>
+           </div>
+        <% end %>
+        <% if @recent_inquiries.empty? %>
+           <p class="text-center py-4 text-muted small">No pending inquiries.</p>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="p-5 bg-primary-custom text-white rounded-5 shadow-sm">
+      <h6 class="text-white-50 fw-bold text-uppercase ls-wide mb-3 small">Need Help?</h6>
+      <h4 class="fw-bold mb-3">Administrator Support</h4>
+      <p class="small text-white-50 mb-4">You have full access to manage WaffiHub content. Remember to optimize images before uploading for better site performance.</p>
+      <%= link_to "Documentation", "#", class: "btn btn-outline-light btn-sm rounded-pill px-4" %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .icon-box-sm { width: 42px; height: 42px; display: flex; align-items-center; justify-content: center; font-size: 1.25rem; }
+  .extra-small { font-size: 0.75rem; }
+  .ls-wide { letter-spacing: 0.05em; }
+  .ls-sm { letter-spacing: 0.02em; }
+</style>

@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Partnerships</h1>
+  <%= link_to "Add Partner", new_admin_partnership_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>Partner</th>
+          <th>Link</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @partnerships.each do |partnership| %>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <% if partnership.logo.attached? %>
+                  <%= image_tag partnership.logo, class: "me-3 rounded", style: "width: 40px; height: 40px; object-fit: contain;" %>
+                <% end %>
+                <span class="fw-bold"><%= partnership.name %></span>
+              </div>
+            </td>
+            <td><%= link_to partnership.link, partnership.link, target: "_blank" if partnership.link.present? %></td>
+            <td class="text-end">
+              <%= link_to "Edit", edit_admin_partnership_path(partnership), class: "btn btn-outline-primary btn-sm" %>
+              <%= button_to "Delete", admin_partnership_path(partnership), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm d-inline-block" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

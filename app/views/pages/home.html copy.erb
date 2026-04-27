@@ -1,0 +1,352 @@
+<%# Hero Section %>
+<section class="py-5 py-lg-7 bg-light d-flex align-items-center" style="min-height: 80vh; background: linear-gradient(135deg, rgba(52, 73, 94, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-3 fw-bold mb-4" style="line-height: 1.1;">Accelerating <span class="text-primary-custom">Innovation</span> in the Heart of Delta.</h1>
+        <p class="lead text-muted mb-5 pe-lg-5">WaffiHub is your gateway to the digital economy. We provide the ecosystem, tools, and talent to build the future of Nigerian tech.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <%= link_to "View Programs", programs_path, class: "btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-lg" %>
+          <%= link_to "Explore Services", services_path, class: "btn btn-outline-primary btn-lg rounded-pill px-5 py-3" %>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="position-relative">
+          <div class="rounded-4 shadow-2xl overflow-hidden shadow-lg">
+               <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200" class="img-fluid" alt="Tech Hub">
+          </div>
+          <div class="bg-white p-4 rounded-3 shadow-lg position-absolute bottom-0 start-0 mb-4 ms-n4 d-none d-md-block" style="width: 250px;">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-success rounded-circle p-1 me-2"><i class="bi bi-check text-white"></i></span>
+              <span class="small fw-semibold">Dynamic Community</span>
+            </div>
+            <p class="small text-muted mb-0">Join 500+ developers and innovators in our network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Services Section %>
+<section class="py-5 py-lg-6 border-bottom">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold h1">What We Do</h2>
+      <p class="text-muted">Specialized solutions for startups, SMEs, and government.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <% @featured_services.each do |service| %>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="card-body">
+              <div class="mb-4 text-primary-custom fs-1">
+                <i class="bi bi-rocket-takeoff"></i>
+              </div>
+              <h4 class="fw-bold mb-3"><%= service.title %></h4>
+              <p class="text-muted small"><%= truncate(strip_tags(service.description.to_s), length: 120) %></p>
+              <%= link_to "Learn More", service_path(service), class: "text-decoration-none fw-semibold small" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Programs Section %>
+<section class="py-5 py-lg-6 bg-primary-custom text-white overflow-hidden">
+  <div class="container position-relative">
+    <div class="row align-items-center mb-5">
+      <div class="col-md-8">
+        <h2 class="fw-bold h1 text-white">Our Top Programs</h2>
+        <p class="text-white-50">Upskill your future with our specialized training paths.</p>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <%= link_to "All Programs", programs_path, class: "btn btn-outline-light rounded-pill px-4" %>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <% @featured_programs.each do |program| %>
+        <div class="col-lg-4">
+          <div class="card bg-white h-100 border-0 shadow text-dark overflow-hidden">
+            <% if program.main_image.attached? %>
+              <%= image_tag program.main_image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body p-4">
+              <span class="badge bg-primary mb-3"><%= program.mode %></span>
+              <h4 class="fw-bold"><%= program.title %></h4>
+              <p class="text-muted small m-0"><%= program.duration %> Duration</p>
+              <div class="d-flex justify-content-between align-items-center mt-4">
+                <span class="h5 fw-bold mb-0 text-primary-custom"><%= number_to_currency(program.price, unit: "₦") %></span>
+                <%= link_to "Enroll Now", program_path(program), class: "btn btn-primary btn-sm rounded-pill px-3" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# 1. CORE OFFERINGS SECTION (New) %>
+<section class="py-6 bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-6" data-aos="fade-up">
+      <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Build, Validate & Grow</h6>
+      <h2 class="display-5 fw-bold mb-3">Startup & SME Business Services</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 800px;">
+        WaffiHub provides structured support to help startups and small businesses thrive, from ideation to investment.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="card h-100 border-0 shadow-sm transition-hover p-4 text-center rounded-4">
+          <div class="icon-box-sm bg-primary-custom text-white mb-4 mx-auto">
+            <i class="bi bi-lightbulb"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Pre-incubation</h5>
+          <p class="text-muted small">For early-stage founders seeking to build viable business models and MVPs.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 border-0 shadow-sm transition-hover p-4 text-center rounded-4">
+          <div class="icon-box-sm bg-info text-white mb-4 mx-auto">
+            <i class="bi bi-rocket-takeoff"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Acceleration</h5>
+          <p class="text-muted small">For growing startups looking to scale, expand, or raise investment.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 border-0 shadow-sm transition-hover p-4 text-center rounded-4">
+          <div class="icon-box-sm bg-success text-white mb-4 mx-auto">
+            <i class="bi bi-person-video3"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Advisory</h5>
+          <p class="text-muted small">One-on-one support to clarify strategy and stay investor-ready.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 border-0 shadow-sm transition-hover p-4 text-center rounded-4">
+          <div class="icon-box-sm bg-warning text-dark mb-4 mx-auto">
+            <i class="bi bi-ui-checks"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Diagnostics</h5>
+          <p class="text-muted small">We assess business health and help identify your growth path.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 3. IMPACT SNAPSHOT (New - Chart.js) %>
+<section class="py-6 bg-light">
+  <div class="container text-center">
+    <div class="mb-5" data-aos="fade-up">
+      <h2 class="fw-bold">Impact Snapshot</h2>
+      <p class="text-muted">Driving social and economic impact through innovation</p>
+    </div>
+    
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6" data-aos="zoom-in">
+        <canvas id="impactChart" style="max-height: 350px;"></canvas>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-sm-6" data-aos="fade-up">
+            <div class="p-4 bg-white rounded-4 shadow-sm">
+              <h2 class="fw-bold text-primary-custom mb-0">50K+</h2>
+              <p class="text-muted small mb-0">Youth Trained</p>
+            </div>
+          </div>
+          <div class="col-sm-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="p-4 bg-white rounded-4 shadow-sm">
+              <h2 class="fw-bold text-success mb-0">12.5K+</h2>
+              <p class="text-muted small mb-0">Jobs Created</p>
+            </div>
+          </div>
+          <div class="col-sm-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="p-4 bg-white rounded-4 shadow-sm">
+              <h2 class="fw-bold text-info mb-0">150+</h2>
+              <p class="text-muted small mb-0">Female-led SMEs</p>
+            </div>
+          </div>
+          <div class="col-sm-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="p-4 bg-white rounded-4 shadow-sm">
+              <h2 class="fw-bold text-warning mb-0">450+</h2>
+              <p class="text-muted small mb-0">Startups Supported</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 4. PRICING SECTION (New) %>
+<section class="py-7 bg-white">
+  <div class="container">
+    <div class="text-center mb-6" data-aos="fade-up">
+      <h2 class="display-5 fw-bold mb-3">Our Flexible Subscription Plans</h2>
+      <p class="text-muted">High-speed connectivity and modern amenities tailored for you.</p>
+    </div>
+    
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="p-4 border-bottom bg-light text-center">
+            <h4 class="fw-bold mb-2">Open Workspace</h4>
+            <div class="h3 fw-bold text-primary-custom mb-0">₦ 4,000<span class="fs-6 text-muted">/day</span></div>
+          </div>
+          <div class="card-body p-4">
+            <ul class="list-unstyled mb-4">
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Dedicated Desk</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Access to Meeting Room</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>STARLINK Internet</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Stable Power</li>
+            </ul>
+            <button class="btn btn-primary w-100 rounded-pill py-3 fw-bold">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden border-top border-4 border-primary-custom">
+          <div class="p-4 border-bottom bg-primary-custom text-white text-center">
+            <h4 class="fw-bold mb-2 text-white">Executive Office</h4>
+            <div class="h3 fw-bold mb-0">₦ 20,000<span class="fs-6 opacity-75">/day</span></div>
+            <span class="badge bg-warning text-dark mt-2">Most Professional</span>
+          </div>
+          <div class="card-body p-4">
+            <ul class="list-unstyled mb-4">
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Private Office Suite</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Swivel Chair & Setup</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>VIP Access</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Premium Networking</li>
+            </ul>
+            <button class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="p-4 border-bottom bg-light text-center">
+            <h4 class="fw-bold mb-2">Virtual Office</h4>
+            <div class="h3 fw-bold text-primary-custom mb-0">₦ 15,000<span class="fs-6 text-muted">/mo</span></div>
+          </div>
+          <div class="card-body p-4">
+            <ul class="list-unstyled mb-4">
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Business Address</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Mail Handling</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>Phone Answering</li>
+               <li class="mb-3"><i class="bi bi-check-circle text-success me-2"></i>4 Days Physical Access</li>
+            </ul>
+            <button class="btn btn-primary w-100 rounded-pill py-3 fw-bold">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 5. WHY CHOOSE US (New) %>
+<section class="py-6 bg-white">
+  <div class="container">
+    <div class="text-center mb-6" data-aos="fade-up">
+      <h2 class="display-5 fw-bold border-bottom d-inline-block pb-3 mb-4">Why Choose Us?</h2>
+    </div>
+    
+    <div class="row g-4">
+      <% [
+        { icon: "lightning-charge", title: "Fast & Reliable Internet", desc: "High-speed connectivity for seamless work." },
+        { icon: "calendar-check", title: "Flexible Plans", desc: "Choose daily, weekly, or monthly subscriptions." },
+        { icon: "gem", title: "Comfortable Spaces", desc: "Environment designed for your comfort and productivity." },
+        { icon: "people", title: "Community Networking", desc: "Connect with like-minded professionals." },
+        { icon: "shield-check", title: "Secure Access", desc: "Work in a secured and safe environment." }
+      ].each_with_index do |item, i| %>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= i * 50 %>">
+          <div class="p-4 border rounded-4 bg-light bg-opacity-50 transition-hover h-100 d-flex gap-3">
+             <div class="text-primary-custom fs-2"><i class="bi bi-<%= item[:icon] %>"></i></div>
+             <div>
+                <h5 class="fw-bold mb-2"><%= item[:title] %></h5>
+                <p class="text-muted small mb-0"><%= item[:desc] %></p>
+             </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# 6. EXISTING CMS CONTENT SECTIONS (Updated with AOS) %>
+<section class="py-6 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+      <div>
+        <h2 class="fw-bold mb-0">Our Dynamic Programs</h2>
+        <p class="text-muted mb-0 font-monospace small">Catch them young. Empowering the future.</p>
+      </div>
+      <%= link_to "View All", programs_path, class: "btn btn-link text-decoration-none fw-bold" %>
+    </div>
+
+    <div class="row g-4">
+      <% @featured_programs.each_with_index do |program, i| %>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <%#= render partial: 'programs/program_card', locals: { program: program } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Partners Section %>
+<section class="py-5 bg-light border-top">
+  <div class="container">
+    <div class="text-center mb-4">
+      <p class="text-muted small fw-bold text-uppercase ls-wide">Our Partners</p>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-5 opacity-75">
+      <% @partners.each do |partner| %>
+        <% if partner.logo.attached? %>
+          <%= image_tag partner.logo, class: "img-fluid grayscale", style: "max-height: 40px; width: auto;", title: partner.name %>
+        <% else %>
+          <span class="fw-bold h5 text-muted"><%= partner.name %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('turbo:load', () => {
+    const ctx = document.getElementById('impactChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Youth Trained', 'Jobs Created', 'Startups Supported', 'Female Businesses'],
+          datasets: [{
+            data: [50000, 12500, 450, 150],
+            backgroundColor: [
+              '#34495E',
+              '#198754',
+              '#FFC107',
+              '#0DCAF0'
+            ],
+            borderWidth: 0,
+            hoverOffset: 20
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } }
+          },
+          cutout: '70%',
+          animation: { animateRotate: true, animateScale: true }
+        }
+      });
+    }
+  });
+</script>

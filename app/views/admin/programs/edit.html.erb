@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Programs", admin_programs_path %></li>
+    <li class="breadcrumb-item active">Edit Program</li>
+  </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mt-4">
+  <div class="card-body p-4">
+    <h1 class="h4 mb-4">Edit: <%= @program.title %></h1>
+    <%= render "form", program: @program %>
+  </div>
+</div>

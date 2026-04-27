@@ -1,0 +1,196 @@
+<%# 1. PREMIUM HERO SECTION %>
+<section class="position-relative py-10 py-lg-12 overflow-hidden bg-primary-custom text-white">
+  <div class="position-absolute top-0 start-0 w-100 h-100 opacity-50 z-0">
+    <%= image_tag "shebuilds.jpg", class: "w-100 h-100", style: "object-fit: cover; filter: brightness(0.35);", alt: "SheBuilds Hero" %>
+  </div>
+  <div class="container position-relative z-1 py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8" data-aos="fade-right">
+        <h6 class="text-info fw-bold text-uppercase ls-wide mb-3">Empowering the Riverine Communities</h6>
+        <h1 class="display-3 fw-bold mb-4 text-white">SheBuilds <span class="text-info">Niger Delta</span>.</h1>
+        <p class="lead text-white-50 mb-5" style="max-width: 650px;">A practical, community-based digital skills intensive designed exclusively for women in the riverine heart of Delta State.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#about" class="btn btn-info btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg">Learn More</a>
+          <a href="#partner" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-bold">Partner With Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 2. PROGRAMME AT A GLANCE (QUICK STATS) %>
+<section class="py-8 bg-white" id="about">
+  <div class="container">
+    <div class="row g-4 overflow-hidden">
+      <% [
+        { label: "Duration", val: "8 Weeks", icon: "calendar3" },
+        { label: "Format", val: "Community-Based", icon: "houses" },
+        { label: "Reach", val: "8 Communities/Year", icon: "geo-alt" },
+        { label: "Cost", val: "Free to Participants", icon: "shield-check" }
+      ].each_with_index do |item, i| %>
+        <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="p-4 bg-light rounded-5 text-center h-100 transition-hover border shadow-sm">
+            <div class="icon-box-sm bg-primary-custom text-white mx-auto mb-3 rounded-4">
+              <i class="bi bi-<%= item[:icon] %>"></i>
+            </div>
+            <p class="text-muted small fw-bold text-uppercase mb-1"><%= item[:label] %></p>
+            <h5 class="fw-bold mb-0 text-primary-custom"><%= item[:val] %></h5>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# 3. THE MISSION & PROBLEM %>
+<section class="py-10 bg-light position-relative">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="rounded-5 overflow-hidden shadow-2xl position-relative p-2 bg-white">
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1200" class="img-fluid rounded-4" alt="Riverine Community">
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="ps-lg-5">
+          <h2 class="display-5 fw-bold mb-4">Closing the Digital Gap, <span class="text-info">One Community</span> at a Time.</h2>
+          <p class="lead text-muted mb-4">Women in riverine Delta communities are talented and entrepreneurial, but often excluded from the digital economy due to location and stereotypes.</p>
+          <div class="mb-5">
+            <div class="d-flex mb-3">
+              <div class="text-info me-3"><i class="bi bi-check-circle-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom">Training delivered inside the community (Schools, Halls, Churches).</p>
+            </div>
+            <div class="d-flex mb-3">
+              <div class="text-info me-3"><i class="bi bi-check-circle-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom">Primarily using tools women already have — smartphones.</p>
+            </div>
+            <div class="d-flex">
+              <div class="text-info me-3"><i class="bi bi-check-circle-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom">Free of charge, including data and transport stipends.</p>
+            </div>
+          </div>
+          <p class="fw-bold h5 text-primary-custom">"We are not bringing the digital world to your community. We are helping your community take its rightful place in it."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 4. LEARNING TRACKS %>
+<section class="py-10 bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-8" data-aos="fade-up">
+      <h6 class="text-info fw-bold text-uppercase ls-wide mb-2" style="margin-top: 150px;">Curriculum</h6>
+      <h2 class="display-5 fw-bold">Earning-Focused Tracks</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">Every track is designed around a single question: "How will this help me earn money and improve my standard of living?"</p>
+    </div>
+
+    <div class="row g-4" style="margin-top: 50px;">
+      <% [
+        { 
+          title: "AI-Powered Income", 
+          desc: "Generate business content, customer messages, and offer research services using no-code AI tools.",
+          icon: "cpu"
+        },
+        { 
+          title: "Social Media Mastery", 
+          desc: "Manage WhatsApp, Facebook, and Instagram professionally and offer management services to local businesses.",
+          icon: "share"
+        },
+        { 
+          title: "WhatsApp Commerce", 
+          desc: "Set up WhatsApp Business, catalogue products, and transition your business from offline to online.",
+          icon: "chat-left-text"
+        },
+        { 
+          title: "Digital Foundations", 
+          desc: "Master internet use, email setup, and online safety while creating simple designs using Canva on your phone.",
+          icon: "phone"
+        }
+      ].each_with_index do |track, i| %>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-lg rounded-5 overflow-hidden transition-hover bg-primary-custom text-white p-5">
+            <div class="icon-box-sm bg-white text-primary-custom mb-4 rounded-4 shadow-sm">
+              <i class="bi bi-<%= track[:icon] %>"></i>
+            </div>
+            <h4 class="fw-bold text-white mb-3"><%= track[:title] %></h4>
+            <p class="text-white-40 small mb-0"><%= track[:desc] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# 5. HOW IT WORKS TIMELINE %>
+<section class="py-10 bg-light overflow-hidden">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-7" data-aos="fade-up">
+      <div class="col-lg-8">
+        <h2 class="display-5 fw-bold mb-3" style="margin-top: 150px;">Community-First Journey</h2>
+        <p class="lead text-muted">We do nothing without your blessing and your partnership. Here is our process.</p>
+      </div>
+    </div>
+
+    <div class="position-relative">
+      <div class="row g-5" style="margin-top: 30px;">
+        <% [
+          { phase: "Engagement", label: "Weeks 0", desc: "Consultation with community leaders, women group leaders, and representatives." },
+          { phase: "Foundations", label: "Weeks 1-5", desc: "Hands-on training, smartphone setup, and guided digital practice." },
+          { phase: "Application", label: "Weeks 6-8", desc: "Real-life application through income-generating projects and business digital tools." },
+          { phase: "Graduation", label: "Demo Day", desc: "Community Demo Day, certificate presentation, and alumni network on-boarding." }
+        ].each_with_index do |step, i| %>
+          <div class="col-lg-3 text-center" data-aos="zoom-in" data-aos-delay="<%= i * 100 %>">
+            <div class="position-relative mb-4">
+              <div class="rounded-pill bg-white shadow-sm fw-bold text-info px-4 py-2 border d-inline-block"><%= step[:label] %></div>
+            </div>
+            <h5 class="fw-bold mb-2"><%= step[:phase] %></h5>
+            <p class="text-muted small mb-0"><%= step[:desc] %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# 6. CALL TO ACTION / PARTNERSHIP %>
+<section class="py-10 bg-white" id="partner">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2 class="display-5 fw-bold mb-4 text-primary-custom" style="margin-top: 150px;">Partner for Impact</h2>
+        <p class="lead text-muted mb-5">We are looking for partner communities to host SheBuilds cohorts of 40–60 women. To bring this programme to your community, we ask for support in venue access and mobilization.</p>
+        <div class="p-5 bg-light rounded-5 border-start border-5 border-info shadow-sm mb-5">
+          <h5 class="fw-bold mb-4">What This Community Will Receive:</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex mb-3">
+              <div class="text-info me-3"><i class="bi bi-star-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom small">Recognised & Branded Certificates of Completion.</p>
+            </li>
+            <li class="d-flex mb-3">
+              <div class="text-info me-3"><i class="bi bi-star-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom small">Ongoing post-programme support through WaffiHub network.</p>
+            </li>
+            <li class="d-flex">
+              <div class="text-info me-3"><i class="bi bi-star-fill"></i></div>
+              <p class="mb-0 fw-semibold text-primary-custom small">Recognition as a SheBuilds Partner Community.</p>
+            </li>
+          </ul>
+        </div>
+        <%= link_to "Inquire About Partnership", contact_path, class: "btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg", style: "margin-bottom: 80px;"%>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="rounded-5 overflow-hidden shadow-2xl p-2 bg-light">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200" class="img-fluid rounded-4" alt="Women in Training">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shadow-2xl { filter: drop-shadow(0 25px 25px rgba(0,0,0,0.1)); }
+  .transition-hover:hover { transform: translateY(-5px); border-color: var(--bs-info) !important; box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important; }
+  .icon-box-sm { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

@@ -1,0 +1,61 @@
+<footer class="py-6 bg-dark text-white">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4" data-aos="fade-up">
+        <%= link_to root_path, class: "d-block mb-4" do %>
+          <%= image_tag "waffihub-logo.png", alt: "WaffiHub", style: "height: 55px; filter: brightness(0) invert(1);" %>
+        <% end %>
+        <p class="text-white-50 small pe-lg-5">
+          Nigeria's premier innovation hub fostering collaboration, technology adoption, and entrepreneurship across the Delta. Providing world-class workspaces and growth opportunities.
+        </p>
+        <div class="d-flex gap-3 fs-5 mt-4">
+          <a href="#" class="text-white-50 hover-white transition-all"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white-50 hover-white transition-all"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="text-white-50 hover-white transition-all"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white-50 hover-white transition-all"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-lg-2 col-6" data-aos="fade-up" data-aos-delay="100">
+        <h6 class="fw-bold mb-4 text-uppercase ls-wide text-white">Quick Links</h6>
+        <ul class="list-unstyled small">
+          <li class="mb-3"><%= link_to "Home", root_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "About Us", about_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "Impact", impact_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "Our Work", projects_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "Get in Touch", contact_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-6" data-aos="fade-up" data-aos-delay="200">
+        <h6 class="fw-bold mb-4 text-uppercase ls-wide text-white">Resources</h6>
+        <ul class="list-unstyled small">
+          <li class="mb-3"><%= link_to "Training Programs", programs_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "Professional Services", services_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><%= link_to "Ecosystem News", posts_path, class: "text-white-50 text-decoration-none hover-white transition-all" %></li>
+          <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white transition-all">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <h6 class="fw-bold mb-4 text-uppercase ls-wide text-white">Join Our Ecosystem</h6>
+        <p class="text-white-50 small mb-4">Stay updated with our latest programs, events, and opportunities in the tech space.</p>
+        <%= form_with url: "#", class: "mb-3" do |f| %>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control bg-transparent text-white border-secondary py-2" placeholder="Email address">
+            <button class="btn btn-primary px-4" type="button">Join</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <hr class="mt-5 mb-4 border-secondary opacity-25">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="text-white-50 small mb-0">&copy; <%= Time.current.year %> WaffiHub Limited. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+        <p class="text-white-50 small mb-0 font-monospace">Empowering West Africa's Tech Future.</p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,28 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <nav aria-label="breadcrumb" class="mb-4 text-center">
+           <%= link_to "Back to Services", services_path, class: "text-decoration-none small" %>
+        </nav>
+        
+        <div class="text-center mb-5">
+          <span class="text-uppercase small fw-bold text-primary-custom ls-wide"><%= @service.category %></span>
+          <h1 class="fw-bold display-4 mt-2"><%= @service.title %></h1>
+          <% if @service.pricing.present? %>
+            <p class="h4 text-muted mt-3">Starting from <%= number_to_currency(@service.pricing, unit: "₦") %></p>
+          <% end %>
+        </div>
+
+        <div class="rich-text-content py-4 border-top border-bottom">
+          <%= @service.description %>
+        </div>
+
+        <div class="mt-5 text-center">
+          <h5 class="fw-bold mb-4">Interested in this service?</h5>
+          <%= link_to "Request a Quote", contact_path(subject: "Inquiry about #{@service.title}"), class: "btn btn-primary btn-lg rounded-pill px-5 shadow" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

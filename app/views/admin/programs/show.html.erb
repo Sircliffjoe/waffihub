@@ -1,0 +1,49 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Programs", admin_programs_path %></li>
+    <li class="breadcrumb-item active"><%= @program.title %></li>
+  </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+  <h1 class="h3"><%= @program.title %></h1>
+  <div>
+    <%= link_to "Edit", edit_admin_program_path(@program), class: "btn btn-primary" %>
+    <%= link_to "Back", admin_programs_path, class: "btn btn-outline-secondary ms-2" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h5 class="card-title text-muted mb-3">Description</h5>
+        <div class="rich-text-content">
+          <%= @program.description %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h5 class="card-title text-muted mb-3">Details</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2"><strong>Price:</strong> <%= number_to_currency(@program.price, unit: "₦") %></li>
+          <li class="mb-2"><strong>Duration:</strong> <%= @program.duration %></li>
+          <li class="mb-2"><strong>Mode:</strong> <%= @program.mode %></li>
+          <li class="mb-2"><strong>Instructor:</strong> <%= @program.instructor %></li>
+        </ul>
+      </div>
+    </div>
+
+    <% if @program.main_image.attached? %>
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title text-muted mb-3">Featured Image</h5>
+          <%= image_tag @program.main_image, class: "img-fluid rounded" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<section class="py-5 bg-white">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "Programs", programs_path %></li>
+        <li class="breadcrumb-item active"><%= @program.title %></li>
+      </ol>
+    </nav>
+
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <% if @program.main_image.attached? %>
+          <%= image_tag @program.main_image, class: "img-fluid rounded-4 shadow-sm mb-5 w-100", style: "max-height: 450px; object-fit: cover;" %>
+        <% end %>
+        
+        <h1 class="fw-bold mb-4"><%= @program.title %></h1>
+        <div class="rich-text-content lead text-muted" style="line-height: 1.8;">
+          <%= @program.description %>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-lg position-sticky" style="top: 100px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="fw-bold mb-4">Program Details</h3>
+            <ul class="list-unstyled">
+              <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                <span class="text-muted">Price</span>
+                <span class="fw-bold text-primary-custom h4 mb-0"><%= number_to_currency(@program.price, unit: "₦") %></span>
+              </li>
+              <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                <span class="text-muted">Duration</span>
+                <span class="fw-bold"><%= @program.duration %></span>
+              </li>
+              <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                <span class="text-muted">Mode</span>
+                <span class="fw-bold"><%= @program.mode %></span>
+              </li>
+              <li class="d-flex justify-content-between mb-4">
+                <span class="text-muted">Instructor</span>
+                <span class="fw-bold"><%= @program.instructor %></span>
+              </li>
+            </ul>
+            <%= button_to "Enroll Now", enroll_program_path(@program), class: "btn btn-primary d-block w-100 py-3 rounded-pill fw-bold shadow-lg" %>
+            <p class="text-center small text-muted mt-3 mb-0">Secure payments powered by Paystack</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

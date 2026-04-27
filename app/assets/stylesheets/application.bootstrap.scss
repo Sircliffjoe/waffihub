@@ -1,0 +1,104 @@
+// Custom Brand Colors
+$primary-custom: #34495E;
+$primary-light: lighten($primary-custom, 10%);
+$primary-dark: darken($primary-custom, 10%);
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+// Custom Typography
+body {
+  font-family: 'Inter', sans-serif;
+  color: #2D3436;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+// Global Helpers
+.text-primary-custom {
+  color: $primary-custom !important;
+}
+
+.bg-primary-custom {
+  background-color: $primary-custom !important;
+}
+
+.ls-wide {
+  letter-spacing: 0.1em;
+}
+
+// Premium Card Effects
+.transition-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+// Icon Boxes
+.icon-box-sm {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+// Sections
+.py-6 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.py-7 {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.py-8 {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+// Animations
+[data-aos] {
+  pointer-events: none;
+
+  &.aos-animate {
+    pointer-events: auto;
+  }
+}
+
+// Hover effects
+.hover-white:hover {
+  color: white !important;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+// Utility for grayscale logos
+.grayscale {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+
+  &:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,56 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+         <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item text-primary-custom fw-bold"><%= @project.client %></li>
+            <li class="breadcrumb-item active"><%= @project.name %></li>
+          </ol>
+        </nav>
+        
+        <h1 class="display-3 fw-bold mb-5"><%= @project.name %></h1>
+        
+        <% if @project.images.attached? %>
+          <div class="row g-3 mb-6">
+            <div class="col-12">
+               <%= image_tag @project.images.first, class: "img-fluid rounded-4 w-100", style: "max-height: 500px; object-fit: cover;" %>
+            </div>
+            <% @project.images.drop(1).each do |image| %>
+               <div class="col-6 col-md-4">
+                  <%= image_tag image, class: "img-fluid rounded-3" %>
+               </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="row g-5">
+          <div class="col-12">
+             <div class="p-4 bg-light rounded-4 mb-5">
+                <h4 class="fw-bold text-primary-custom mb-3">The Problem</h4>
+                <div class="rich-text-content lead">
+                  <%= @project.problem %>
+                </div>
+             </div>
+          </div>
+          <div class="col-12">
+             <h4 class="fw-bold text-primary-custom mb-3">The Solution</h4>
+             <div class="rich-text-content lead mb-5">
+                <%= @project.solution %>
+             </div>
+          </div>
+          <div class="col-12 border-top pt-5">
+             <h4 class="fw-bold text-success mb-3">The Outcome</h4>
+             <div class="rich-text-content lead">
+                <%= @project.outcome %>
+             </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-top text-center">
+           <%= link_to "View Other Projects", projects_path, class: "btn btn-outline-primary rounded-pill px-5" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WaffiHub | Management Center</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+      :root {
+        --sidebar-width: 280px;
+        --sidebar-bg: #1a1c1e;
+        --sidebar-color: #94a3b8;
+        --sidebar-active-bg: #2d3339;
+        --sidebar-active-color: #ffffff;
+      }
+
+      body {
+        background-color: #f8fafc;
+        overflow-x: hidden;
+      }
+
+      /* Sidebar Structure */
+      .admin-wrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .admin-sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--sidebar-bg);
+        color: var(--sidebar-color);
+        position: fixed;
+        height: 100vh;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(255,255,255,0.05);
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: #2d3339 transparent;
+      }
+
+      .admin-sidebar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .admin-sidebar::-webkit-scrollbar-thumb {
+        background-color: #2d3339;
+        border-radius: 10px;
+      }
+
+      .admin-content {
+        flex: 1;
+        margin-left: var(--sidebar-width);
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+      }
+
+      /* Navigation Items */
+      .nav-group-title {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #475569;
+        margin: 1.5rem 1.5rem 0.75rem;
+      }
+
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        color: var(--sidebar-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        border-right: 3px solid transparent;
+      }
+
+      .sidebar-link i {
+        font-size: 1.1rem;
+        margin-right: 0.75rem;
+        width: 20px;
+        text-align: center;
+      }
+
+      .sidebar-link:hover {
+        background-color: var(--sidebar-active-bg);
+        color: var(--sidebar-active-color);
+      }
+
+      .sidebar-link.active {
+        background-color: var(--sidebar-active-bg);
+        color: var(--sidebar-active-color);
+        border-right-color: #3b82f6;
+      }
+
+      /* Logo Area */
+      .sidebar-brand {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        margin-bottom: 1rem;
+      }
+
+      /* User Badge */
+      .sidebar-user {
+        margin-top: auto;
+        padding: 1.5rem;
+        background-color: rgba(0,0,0,0.2);
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+
+      @media (max-width: 992px) {
+        .admin-sidebar { margin-left: calc(-1 * var(--sidebar-width)); }
+        .admin-content { margin-left: 0; padding: 1.5rem; }
+        .admin-sidebar.show { margin-left: 0; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-wrapper">
+      <%# SIDEBAR %>
+      <aside class="admin-sidebar shadow-lg">
+        <div class="sidebar-brand">
+          <h4 class="text-white fw-bold mb-0">WaffiHub <span class="text-info">CMS</span></h4>
+        </div>
+
+        <nav class="flex-column">
+          <div class="nav-group-title">Main</div>
+          <%= link_to admin_root_path, class: "sidebar-link #{'active' if current_page?(admin_root_path)}" do %>
+            <i class="bi bi-speedometer2"></i> Dashboard
+          <% end %>
+
+          <div class="nav-group-title">Core Operations</div>
+          <%= link_to admin_programs_path, class: "sidebar-link #{'active' if controller_name == 'programs'}" do %>
+            <i class="bi bi-mortarboard"></i> Academy Programs
+          <% end %>
+          <%= link_to admin_enrollments_path, class: "sidebar-link #{'active' if controller_name == 'enrollments'}" do %>
+            <i class="bi bi-people"></i> Talent Roster
+          <% end %>
+          <%= link_to admin_services_path, class: "sidebar-link #{'active' if controller_name == 'services'}" do %>
+            <i class="bi bi-cpu"></i> Tech Services
+          <% end %>
+
+          <div class="nav-group-title">Content HUB</div>
+          <%= link_to admin_posts_path, class: "sidebar-link #{'active' if controller_name == 'posts'}" do %>
+            <i class="bi bi-newspaper"></i> News & Insights
+          <% end %>
+          <%= link_to admin_projects_path, class: "sidebar-link #{'active' if controller_name == 'projects'}" do %>
+            <i class="bi bi-kanban"></i> Flagship Projects
+          <% end %>
+
+          <div class="nav-group-title">Ecosystem</div>
+          <%= link_to admin_team_members_path, class: "sidebar-link #{'active' if controller_name == 'team_members'}" do %>
+            <i class="bi bi-person-badge"></i> The Team
+          <% end %>
+          <%= link_to admin_partnerships_path, class: "sidebar-link #{'active' if controller_name == 'partnerships'}" do %>
+            <i class="bi bi-handshake"></i> Partnerships
+          <% end %>
+          <%= link_to admin_inquiries_path, class: "sidebar-link #{'active' if controller_name == 'inquiries'}" do %>
+            <i class="bi bi-chat-dots"></i> Community Inbox
+          <% end %>
+        </nav>
+
+        <div class="sidebar-user">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle bg-info text-dark d-flex align-items-center justify-content-center fw-bold small me-2" style="width: 32px; height: 32px;">
+              <%= current_user.email[0].upcase %>
+            </div>
+            <div class="overflow-hidden">
+              <div class="text-white small fw-bold text-truncate"><%= current_user.email %></div>
+              <div class="extra-small text-muted">System Administrator</div>
+            </div>
+          </div>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm w-100 rounded-pill small" %>
+        </div>
+      </aside>
+
+      <%# MAIN CONTENT %>
+      <main class="admin-content">
+        <% if notice %>
+          <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger border-0 shadow-sm rounded-4 mb-4"><%= alert %></div>
+        <% end %>
+
+        <%= yield %>
+      </main>
+    </div>
+
+    <script>
+      // Tooltip or Other Admin JS could go here
+    </script>
+  </body>
+</html>

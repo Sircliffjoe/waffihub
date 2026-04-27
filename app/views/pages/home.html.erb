@@ -1,0 +1,313 @@
+<%# Hero Section %>
+<section class="py-5 py-lg-7 bg-light d-flex align-items-center" style="min-height: 80vh; background: linear-gradient(135deg, rgba(52, 73, 94, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-3 fw-bold mb-4" style="line-height: 1.1;">Accelerating <span class="text-primary-custom">Innovation</span> in the Heart of Delta.</h1>
+        <p class="lead text-muted mb-5 pe-lg-5">WaffiHub is your gateway to the digital economy. We provide the ecosystem, tools, and talent to build the future of Nigerian tech.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <%= link_to "View Programs", programs_path, class: "btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-lg" %>
+          <%= link_to "Explore Services", services_path, class: "btn btn-outline-primary btn-lg rounded-pill px-5 py-3" %>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="position-relative">
+          <div class="rounded-4 shadow-2xl overflow-hidden shadow-lg">
+               <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200" class="img-fluid" alt="Tech Hub">
+          </div>
+          <div class="bg-white p-4 rounded-3 shadow-lg position-absolute bottom-0 start-0 mb-4 ms-n4 d-none d-md-block" style="width: 250px;">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-success rounded-circle p-1 me-2"><i class="bi bi-check text-white"></i></span>
+              <span class="small fw-semibold">Dynamic Community</span>
+            </div>
+            <p class="small text-muted mb-0">Join 500+ developers and innovators in our network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Services Section %>
+<section class="py-8 border-bottom bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-6" data-aos="fade-up">
+      <h2 class="display-5 fw-bold mb-3">What We Do</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">Specialized solutions for startups, SMEs, and government sectors to excel in the digital age.</p>
+    </div>
+    <div class="row g-5 justify-content-center">
+      <% @featured_services.each_with_index do |service, i| %>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-sm p-5 transition-hover rounded-5">
+            <div class="card-body p-0">
+              <div class="mb-4 text-primary-custom fs-1">
+                <i class="bi bi-rocket-takeoff"></i>
+              </div>
+              <h4 class="fw-bold mb-3"><%= service.title %></h4>
+              <p class="text-muted small mb-4"><%= truncate(strip_tags(service.description.to_s), length: 150) %></p>
+              <%= link_to "Learn More", service_path(service), class: "btn btn-link p-0 text-decoration-none fw-bold small text-primary-custom" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Core Offerings Section %>
+<section class="py-6 bg-light overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-6" data-aos="fade-up">
+      <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Build, Validate & Grow</h6>
+      <h2 class="display-5 fw-bold mb-3">Startup & SME Business Services</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 800px;">
+        WaffiHub provides structured support to help startups and small businesses thrive, from ideation to investment.
+      </p>
+    </div>
+
+    <div class="row g-5">
+      <% [
+        { title: "Pre-incubation", icon: "lightbulb", bg: "primary-custom", desc: "For early-stage founders seeking to build viable business models and MVPs." },
+        { title: "Acceleration", icon: "rocket-takeoff", bg: "info", desc: "For growing startups looking to scale, expand, or raise investment." },
+        { title: "Advisory", icon: "person-video3", bg: "success", desc: "One-on-one support to clarify strategy and stay investor-ready." },
+        { title: "Diagnostics", icon: "ui-checks", bg: "warning", desc: "We assess business health and help identify your growth path." }
+      ].each_with_index do |offering, i| %>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-sm transition-hover p-5 text-center rounded-5 bg-white">
+            <div class="icon-box-sm bg-<%= offering[:bg] %> text-white mb-4 mx-auto rounded-4 shadow-sm">
+              <i class="bi bi-<%= offering[:icon] %>"></i>
+            </div>
+            <h5 class="fw-bold mb-3"><%= offering[:title] %></h5>
+            <p class="text-muted small mb-0"><%= offering[:desc] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Impact Snapshot Section %>
+<section class="py-8 bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-7" data-aos="fade-up">
+      <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Our Reach</h6>
+      <h2 class="display-5 fw-bold mb-3">Impact Snapshot</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 600px;">Driving social and economic impact through innovation across the region.</p>
+    </div>
+    
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6" data-aos="zoom-in">
+        <div class="rounded-5 shadow-lg overflow-hidden">
+          <%= image_tag "impact_infographic.png", class: "img-fluid w-100", alt: "Impact Infographic" %>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <% [
+            { label: "Youth Trained", value: "50K+", color: "primary-custom" },
+            { label: "Jobs Created", value: "12.5K+", color: "success" },
+            { label: "Female-led SMEs", value: "150+", color: "info" },
+            { label: "Startups Supported", value: "450+", color: "warning" }
+          ].each_with_index do |stat, i| %>
+            <div class="col-sm-6" data-aos="fade-left" data-aos-delay="<%= i * 100 %>">
+              <div class="p-5 bg-light rounded-5 border-start border-5 border-<%= stat[:color] %> shadow-sm transition-hover h-100">
+                <h2 class="display-5 fw-bold text-<%= stat[:color] %> mb-1"><%= stat[:value] %></h2>
+                <p class="text-muted fw-bold small mb-0 text-uppercase ls-wide"><%= stat[:label] %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Pricing Section %>
+<section class="py-8 bg-light">
+  <div class="container">
+    <div class="text-center mb-7" data-aos="fade-up">
+       <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Work with comfort</h6>
+      <h2 class="display-5 fw-bold mb-3">Co-working Hub Subscriptions</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 750px;">High-speed connectivity and modern amenities tailored for independent creators and expanding teams.</p>
+    </div>
+    
+    <div class="row g-5 justify-content-center">
+      <% [
+        { title: "Daily Access", price: "4,000", unit: "/day", features: ["Dedicated Desk", "High-speed Internet", "Stable Power", "Access to Meeting Room"], btn: "Book Now", highlight: false },
+        { title: "Weekly Access", price: "20,000", unit: "/week", features: ["Private Desk Space", "Unlimited Starlink", "VIP Lounge Access", "Networking Events"], btn: "Book Now", highlight: true },
+        { title: "Monthly Access", price: "50,000", unit: "/mo", features: ["Business Address", "All Access Pass", "Dedicated Support", "Projector & Equipment"], btn: "Book Now", highlight: false }
+      ].each_with_index do |plan, i| %>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-lg rounded-5 overflow-hidden <%= 'border-top border-5 border-primary-custom' if plan[:highlight] %>">
+            <div class="p-5 text-center <%= plan[:highlight] ? 'bg-primary-custom text-white' : 'bg-white' %>">
+              <h4 class="fw-bold mb-3 <%= 'text-white' if plan[:highlight] %>"><%= plan[:title] %></h4>
+              <div class="display-5 fw-bold mb-0">₦ <%= plan[:price] %><span class="fs-6 <%= plan[:highlight] ? 'text-white-50' : 'text-muted' %>"><%= plan[:unit] %></span></div>
+              <% if plan[:highlight] %>
+                <span class="badge bg-warning text-dark mt-2 text-uppercase">Most Popular</span>
+              <% end %>
+            </div>
+            <div class="card-body p-5 bg-white">
+              <ul class="list-unstyled mb-5">
+                <% plan[:features].each do |feature| %>
+                  <li class="mb-3 d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill text-success me-3"></i>
+                    <span class="text-muted"><%= feature %></span>
+                  </li>
+                <% end %>
+              </ul>
+              <button class="btn <%= plan[:highlight] ? 'btn-primary' : 'btn-outline-primary' %> w-100 rounded-pill py-3 fw-bold shadow-sm transition-all"><%= plan[:btn] %></button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Why Choose Us Section %>
+<section class="py-8 bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-7" data-aos="fade-up">
+      <h2 class="display-5 fw-bold mb-4">Why Choose WaffiHub?</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">We go beyond providing space. We provide a thriving community and tools for success.</p>
+    </div>
+    
+    <div class="row g-5">
+      <% [
+        { icon: "lightning-charge", title: "Fast & Reliable Internet", desc: "High-speed Starlink connectivity for seamless work." },
+        { icon: "calendar-check", title: "Flexible Plans", desc: "Daily, weekly, or monthly subscriptions to fit your rhythm." },
+        { icon: "gem", title: "Comfortable Spaces", desc: "Professionally designed environment built for productivity." },
+        { icon: "people", title: "Community Networking", desc: "Connect with high-performers and like-minded professionals." },
+        { icon: "shield-check", title: "Secure Access", desc: "Safe, secured, and power-ready workspace 24/7." },
+        { icon: "cup-hot", title: "Premium Amenities", desc: "Complimentary coffee, tea, and lounge areas for deep focus breaks." }
+      ].each_with_index do |item, i| %>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= i * 50 %>">
+          <div class="p-5 border-0 rounded-5 bg-light shadow-sm transition-hover h-100 d-flex gap-4">
+             <div class="icon-box-sm bg-primary-custom bg-opacity-10 text-primary-custom mb-0 shrink-0 rounded-4">
+                <i class="bi bi-<%= item[:icon] %>"></i>
+             </div>
+             <div>
+                <h5 class="fw-bold mb-2"><%= item[:title] %></h5>
+                <p class="text-muted small mb-0"><%= item[:desc] %></p>
+             </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Training Programs Section %>
+<section class="py-8 bg-primary-custom text-white overflow-hidden">
+  <div class="container">
+    <div class="row align-items-end mb-6" data-aos="fade-up">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h6 class="text-white-50 fw-bold text-uppercase ls-wide mb-2">Empowering the Future</h6>
+        <h2 class="display-5 fw-bold text-white mb-0">Training Programs</h2>
+      </div>
+      <div class="col-lg-6 text-lg-end">
+        <%= link_to "View All Programs", programs_path, class: "btn btn-outline-light rounded-pill px-5 py-3 fw-bold transition-all mb-1" %>
+      </div>
+    </div>
+
+    <div class="row g-5 mt-2">
+      <% @featured_programs.each_with_index do |program, i| %>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+           <div class="card h-100 border-0 shadow-lg text-dark overflow-hidden rounded-5 transition-hover">
+            <div class="aspect-ratio-box" style="height: 250px;">
+              <% if program.main_image.attached? %>
+                <%= image_tag program.main_image, class: "card-img-top h-100 w-100", style: "object-fit: cover;" %>
+              <% else %>
+                <% 
+                  # Fallback to generated images based on title
+                  img_map = {
+                    'Software' => 'software_bootcamp.png',
+                    'Data' => 'data_science.png',
+                    'UI/UX' => 'ui_ux_design.png'
+                  }
+                  matched_img = img_map.find { |k, v| program.title.include?(k) }&.last || 'software_bootcamp.png'
+                %>
+                <%= image_tag matched_img, class: "card-img-top h-100 w-100", style: "object-fit: cover;" %>
+              <% end %>
+            </div>
+            <div class="card-body p-5 d-flex flex-column">
+              <span class="badge bg-primary-custom mb-4 px-3 py-2 rounded-pill align-self-start"><%= program.mode %></span>
+              <h3 class="fw-bold mb-4 h4"><%= program.title %></h3>
+              <div class="d-flex align-items-center mb-5 text-muted small">
+                 <i class="bi bi-clock me-2"></i> <%= program.duration %>
+              </div>
+              <div class="mt-auto pt-4 border-top d-flex justify-content-between align-items-center">
+                <span class="h4 fw-bold mb-0 text-primary-custom"><%= number_to_currency(program.price, unit: "₦") %></span>
+                <%= link_to "Learn More", program_path(program), class: "btn btn-primary rounded-pill px-4" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Latest News Section %>
+<section class="py-8 bg-white overflow-hidden">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-7" data-aos="fade-up">
+      <div>
+        <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Ecosystem Updates</h6>
+        <h2 class="display-5 fw-bold mb-0">Latest Hub News</h2>
+      </div>
+      <%= link_to "Visit Blog", posts_path, class: "btn btn-link p-0 text-decoration-none fw-bold text-primary-custom" %>
+    </div>
+
+    <div class="row g-5">
+      <% @latest_posts.each_with_index do |post, i| %>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <article class="h-100 transition-hover rounded-5 p-2 card border-0">
+            <div class="mb-4 overflow-hidden rounded-5 shadow-sm" style="height: 260px;">
+              <% if post.featured_image.attached? %>
+                <%= link_to post_path(post.slug) do %>
+                  <%= image_tag post.featured_image, class: "img-fluid h-100 w-100 transition-all", style: "object-fit: cover;" %>
+                <% end %>
+              <% else %>
+                <%= link_to post_path(post.slug), class: "d-block h-100" do %>
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800" class="img-fluid h-100 w-100" style="object-fit: cover;" alt="News">
+                <% end %>
+              <% end %>
+            </div>
+            <div class="px-3 pb-3">
+              <time class="text-muted small fw-bold d-block mb-2 text-uppercase ls-wide"><%= post.published_at.strftime("%B %d, %Y") %></time>
+              <h4 class="fw-bold mb-3"><%= link_to post.title, post_path(post.slug), class: "text-dark text-decoration-none hover-primary" %></h4>
+              <p class="text-muted small mb-4"><%= truncate(strip_tags(post.content.to_s), length: 130) %></p>
+              <%= link_to "Read Article →", post_path(post.slug), class: "link-primary text-decoration-none fw-bold small transition-all" %>
+            </div>
+          </article>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Partners Section %>
+<section class="py-8 bg-light border-top">
+  <div class="container">
+    <div class="text-center mb-6">
+      <h3 class="fw-bold mb-2">Our Strategic Partners</h3>
+      <p class="text-muted small fw-bold text-uppercase ls-wide mb-0">Driving Innovation Together</p>
+    </div>
+    <div class="row g-5 justify-content-center align-items-center">
+      <% [
+        { name: "Google for Startups", img: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=200" },
+        { name: "Microsoft", img: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=200" },
+        { name: "AWS", img: "https://images.unsplash.com/photo-1623282033815-40b05d96c9bb?w=200" },
+        { name: "Stripe", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=200" },
+        { name: "GitHub", img: "https://images.unsplash.com/photo-1618401471353-b98aadebc25e?w=200" }
+      ].each_with_index do |partner, i| %>
+        <div class="col-lg-2 col-md-4 col-6 text-center" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="p-4 bg-white rounded-4 shadow-sm grayscale hover-none transition-all">
+            <img src="<%= partner[:img] %>" class="img-fluid" style="max-height: 40px; width: auto;" alt="<%= partner[:name] %>">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

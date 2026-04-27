@@ -1,0 +1,34 @@
+<%= form_with(model: [:admin, project], class: "row g-3") do |f| %>
+  <div class="col-md-6">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="col-md-6">
+    <%= f.label :client, class: "form-label" %>
+    <%= f.text_field :client, class: "form-control" %>
+  </div>
+  <div class="col-12">
+    <%= f.label :images, "Project Images", class: "form-label" %>
+    <%= f.file_field :images, multiple: true, class: "form-control" %>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :problem, class: "form-label" %>
+    <%= f.rich_text_area :problem, class: "form-control", style: "min-height: 150px;" %>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :solution, class: "form-label" %>
+    <%= f.rich_text_area :solution, class: "form-control", style: "min-height: 150px;" %>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :outcome, class: "form-label" %>
+    <%= f.rich_text_area :outcome, class: "form-control", style: "min-height: 150px;" %>
+  </div>
+
+  <div class="col-12 mt-4">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_projects_path, class: "btn btn-outline-secondary ms-2" %>
+  </div>
+<% end %>

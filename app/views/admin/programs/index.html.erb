@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Programs</h1>
+  <%= link_to "New Program", new_admin_program_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Mode</th>
+          <th>Instructor</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @programs.each do |program| %>
+          <tr>
+            <td>
+              <div class="fw-bold"><%= program.title %></div>
+              <small class="text-muted"><%= program.duration %></small>
+            </td>
+            <td><%= number_to_currency(program.price, unit: "₦") %></td>
+            <td><span class="badge bg-secondary"><%= program.mode %></span></td>
+            <td><%= program.instructor %></td>
+            <td class="text-end">
+              <%= link_to "View", admin_program_path(program), class: "btn btn-outline-info btn-sm" %>
+              <%= link_to "Edit", edit_admin_program_path(program), class: "btn btn-outline-primary btn-sm" %>
+              <%= button_to "Delete", admin_program_path(program), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm d-inline-block" %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @programs.empty? %>
+          <tr>
+            <td colspan="5" class="text-center py-4 text-muted">No programs found.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

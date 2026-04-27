@@ -1,0 +1,71 @@
+<div class="min-vh-100 d-flex flex-column flex-lg-row">
+  <%# 1. VISUAL SIDE %>
+  <div class="col-lg-7 d-none d-lg-flex position-relative align-items-center justify-content-center bg-primary-custom p-9 overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100">
+      <%= image_tag "about_hero.png", class: "w-100 h-100", style: "object-fit: cover; filter: brightness(0.4);" %>
+    </div>
+    <div class="position-relative z-1 text-center text-white" data-aos="fade-up">
+      <h1 class="display-3 fw-bold mb-4">WaffiHub <br><span class="text-info">Management Center</span></h1>
+      <p class="lead text-white-50 mx-auto" style="max-width: 500px;">Empowering the next generation of digital talent in the Niger Delta ecosystem.</p>
+    </div>
+  </div>
+
+  <%# 2. FORM SIDE %>
+  <div class="col-lg-5 d-flex align-items-center justify-content-center bg-white p-5 p-lg-9">
+    <div class="w-100" style="max-width: 420px;" data-aos="fade-left">
+      <div class="mb-5">
+        <h2 class="fw-bold mb-2 h3">Welcome Back</h2>
+        <p class="text-muted small">Access your secure administrator portal</p>
+      </div>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "row g-4" }) do |f| %>
+        <div class="col-12">
+          <div class="form-floating">
+            <%= f.email_field :email, class: "form-control border-0 bg-light rounded-pill px-4", id: "floatingEmail", placeholder: "Email", autofocus: true, autocomplete: "email", required: true %>
+            <label for="floatingEmail" class="ps-4">Email Address</label>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-floating">
+            <%= f.password_field :password, class: "form-control border-0 bg-light rounded-pill px-4", id: "floatingPassword", placeholder: "Password", autocomplete: "current-password", required: true %>
+            <label for="floatingPassword" class="ps-4">Password</label>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="col-12">
+            <div class="form-check form-check-inline">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label :remember_me, class: "form-check-label small text-muted" %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="col-12 mt-5">
+          <%= f.submit "Secure Access", class: "btn btn-primary d-block w-100 py-3 rounded-pill fw-bold shadow-lg" %>
+        </div>
+      <% end %>
+
+      <div class="mt-5 text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+
+      <div class="mt-7 pt-5 border-top text-center">
+        <p class="extra-small text-muted mb-0">© <%= Time.current.year %> WaffiHub Digital. Authorized access only.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  body { background-color: #ffffff !important; }
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+    color: var(--bs-primary-custom);
+  }
+  .extra-small { font-size: 0.7rem; }
+  .btn-primary { background-color: var(--bs-primary-custom); border: none; }
+  .btn-primary:hover { background-color: #243b4d; transform: translateY(-2px); }
+</style>

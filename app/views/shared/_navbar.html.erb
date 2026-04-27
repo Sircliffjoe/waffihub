@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom sticky-top py-3 shadow-sm">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "waffihub-logo.png", alt: "WaffiHub", style: "height: 45px; filter: brightness(0) invert(1);" %>
+    <% end %>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link px-3" %></li>
+        <li class="nav-item"><%= link_to "About", about_path, class: "nav-link px-3" %></li>
+        <li class="nav-item"><%= link_to "Services", services_path, class: "nav-link px-3" %></li>
+        <li class="nav-item"><%= link_to "Programs", programs_path, class: "nav-link px-3 fw-bold text-warning" %></li>
+        <li class="nav-item"><%= link_to "SheBuilds", shebuilds_path, class: "nav-link px-3 text-info fw-bold" %></li>
+        <li class="nav-item"><%= link_to "Projects", projects_path, class: "nav-link px-3" %></li>
+        <li class="nav-item"><%= link_to "Impact", impact_path, class: "nav-link px-3" %></li>
+        <li class="nav-item"><%= link_to "News", posts_path, class: "nav-link px-3" %></li>
+        <li class="nav-item ms-lg-3">
+          <%= link_to "Get in Touch", contact_path, class: "btn btn-outline-light rounded-pill px-4" %>
+        </li>
+        <% if user_signed_in? && current_user.admin? %>
+          <li class="nav-item ms-lg-2">
+            <%= link_to admin_root_path, class: "nav-link text-info", title: "Admin Panel" do %>
+              <i class="bi bi-speedometer2"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

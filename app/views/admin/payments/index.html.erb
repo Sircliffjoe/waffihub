@@ -1,0 +1,34 @@
+<h1 class="h3 mb-4">Payment Transactions</h1>
+
+<div class="card shadow-sm border-0 text-dark">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>Reference</th>
+          <th>User</th>
+          <th>Program</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr>
+            <td><code><%= payment.transaction_reference %></code></td>
+            <td><%= payment.user.email %></td>
+            <td><%= payment.program.title %></td>
+            <td><%= number_to_currency(payment.amount, unit: "₦") %></td>
+            <td>
+              <span class="badge <%= payment.status == 'success' ? 'bg-success' : 'bg-warning' %> text-capitalize">
+                <%= payment.status %>
+              </span>
+            </td>
+            <td><%= payment.created_at.strftime("%B %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

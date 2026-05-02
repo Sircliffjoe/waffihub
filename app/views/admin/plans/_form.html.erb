@@ -1,0 +1,52 @@
+<%= form_with(model: [:admin, plan], class: "row g-4") do |f| %>
+  <% if plan.errors.any? %>
+    <div class="col-12">
+      <div class="alert alert-danger rounded-4 shadow-sm border-0">
+        <h4 class="h6 fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i> <%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h4>
+        <ul class="mb-0 mt-2 small">
+          <% plan.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-md-6">
+    <%= f.label :name, "Plan Name", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.text_field :name, class: "form-control form-control-lg border-light shadow-sm rounded-4 bg-white", placeholder: "e.g., Weekly Access" %>
+  </div>
+
+  <div class="col-md-3">
+    <%= f.label :price, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <div class="input-group input-group-lg shadow-sm rounded-4 overflow-hidden">
+      <span class="input-group-text bg-white border-light text-muted fw-bold border-end-0">₦</span>
+      <%= f.number_field :price, step: 0.01, class: "form-control border-light border-start-0", placeholder: "20000.0" %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <%= f.label :interval, "Billing Interval", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.text_field :interval, class: "form-control form-control-lg border-light shadow-sm rounded-4 bg-white", placeholder: "e.g., /week" %>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-check form-switch p-0 ms-4">
+      <%= f.check_box :highlight, class: "form-check-input ms-n4", id: "planHighlight" %>
+      <%= f.label :highlight, "Highlight this plan (Most Popular)", class: "form-check-label fw-bold text-dark ms-2", for: "planHighlight" %>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :features_text, "Plan Features (One per line)", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <div class="bg-white rounded-4 shadow-sm border border-light overflow-hidden p-2">
+      <%= f.text_area :features_text, value: (plan.features || []).join("\n"), class: "form-control border-0", style: "min-height: 200px;", placeholder: "Dedicated Desk\nHigh-speed Internet\nStable Power" %>
+    </div>
+    <div class="form-text small text-muted mt-2">Enter each feature on a new line.</div>
+  </div>
+
+  <div class="col-12 mt-4 pt-4 border-top">
+    <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm" %>
+    <%= link_to "Cancel", admin_plans_path, class: "btn btn-light btn-lg border rounded-pill px-5 ms-3 fw-bold text-dark shadow-sm" %>
+  </div>
+<% end %>

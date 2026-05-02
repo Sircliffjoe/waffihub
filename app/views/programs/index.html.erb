@@ -45,7 +45,7 @@
             
             <div class="card-body p-5 d-flex flex-column">
               <div class="d-flex justify-content-between align-items-center mb-4">
-                <span class="badge bg-primary-custom bg-opacity-10 text-primary-custom px-3 py-2 rounded-pill small fw-bold">
+                <span class="badge bg-primary-custom bg-opacity-10 text-white px-3 py-2 rounded-pill small fw-bold">
                   <%= program.mode %>
                 </span>
                 <span class="text-muted small fw-bold text-uppercase ls-sm">
@@ -58,10 +58,10 @@
               
               <div class="mt-auto pt-4 border-top d-flex justify-content-between align-items-center">
                 <div>
-                   <div class="text-muted extra-small text-uppercase fw-bold ls-wide opacity-50">Tuition Fee</div>
-                   <div class="h4 fw-bold mb-0 text-primary-custom"><%= number_to_currency(program.price, unit: "₦") %></div>
+                   <div class="text-muted extra-small text-uppercase fw-bold ls-wide opacity-50">Course Fee</div>
+                   <div class="h5 fw-bold mb-0 text-primary-custom"><%= number_to_currency(program.price, unit: "₦") %></div>
                 </div>
-                <%= link_to "View Details", program_path(program), class: "btn btn-primary rounded-pill px-4 shadow-sm" %>
+                <%= link_to "Details", program_path(program), class: "btn btn-primary rounded-pill px-4 shadow-sm" %>
               </div>
             </div>
           </div>

@@ -1,0 +1,79 @@
+<section class="position-relative py-10 py-lg-12 overflow-hidden bg-primary-custom text-white">
+  <div class="position-absolute top-0 start-0 w-100 h-100 opacity-30 z-0">
+    <% if @project.main_image.attached? %>
+      <%= image_tag @project.main_image, class: "w-100 h-100", style: "object-fit: cover; filter: brightness(0.35);", alt: @project.name %>
+    <% else %>
+      <%= image_tag "about_hero.png", class: "w-100 h-100", style: "object-fit: cover; filter: brightness(0.35);", alt: @project.name %>
+    <% end %>
+  </div>
+  <div class="container position-relative z-1 py-5 text-center">
+    <h6 class="text-info fw-bold text-uppercase ls-wide mb-3">Strategic Alliance</h6>
+    <h1 class="display-3 fw-bold mb-4">Partner with <%= @project.name %></h1>
+    <p class="lead text-white-50 mx-auto mb-0" style="max-width: 800px;">Join us in creating lasting impact and driving technological advancement in the Niger Delta through strategic collaboration.</p>
+  </div>
+</section>
+
+<section class="py-10 bg-white">
+  <div class="container">
+    <div class="row g-5 align-items-center mb-9">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2 class="display-5 fw-bold mb-4">Why Partner <span class="text-info">With Us</span>?</h2>
+        <p class="lead text-muted mb-5">By partnering with WaffiHub on <%= @project.name %>, you are aligning with a movement dedicated to grassroots innovation and social transformation.</p>
+        
+        <div class="d-grid gap-4 mb-5">
+          <% [
+            { icon: "star-fill", title: "Direct Social Impact", desc: "Contribute to the economic empowerment of riverine and tech-underserved communities." },
+            { icon: "graph-up", title: "Shared Visibility", desc: "Benefit from joint brand exposure and media coverage throughout the project lifecycle." },
+            { icon: "people-fill", title: "Talent Access", desc: "Get early access to the skilled talents and innovators emerging from our programs." }
+          ].each do |item| %>
+            <div class="d-flex gap-4">
+              <div class="icon-box-sm bg-light text-info rounded-4 flex-shrink-0">
+                <i class="bi bi-<%= item[:icon] %>"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1"><%= item[:title] %></h5>
+                <p class="text-muted small mb-0"><%= item[:desc] %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="card border-0 shadow-2xl rounded-5 p-5 bg-light">
+          <h3 class="fw-bold mb-4">Partnership Inquiry</h3>
+          <%= form_with model: [@project, @partnership], url: partner_project_path(@project), class: "row g-4" do |f| %>
+            <div class="col-12">
+              <%= f.label :organization_name, "Organization Name", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.text_field :organization_name, class: "form-control form-control-lg border-white shadow-sm rounded-pill px-4 bg-white", placeholder: "e.g., Global Tech Foundation", required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :contact_person, "Contact Person", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.text_field :contact_person, class: "form-control form-control-lg border-white shadow-sm rounded-pill px-4 bg-white", placeholder: "e.g., John Doe", required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :email, "Work Email", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.email_field :email, class: "form-control form-control-lg border-white shadow-sm rounded-pill px-4 bg-white", placeholder: "e.g., partnerships@org.com", required: true %>
+            </div>
+            <div class="col-12">
+              <%= f.label :partnership_type, "Preferred Partnership Type", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.select :partnership_type, ["Corporate Sponsorship", "In-kind Support", "Technical Partnership", "Implementation Partner", "Other"], { prompt: "Select type..." }, class: "form-select form-select-lg border-white shadow-sm rounded-pill px-4 bg-white", required: true %>
+            </div>
+            <div class="col-12">
+              <%= f.label :message, "Additional Message/Context", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.text_area :message, class: "form-control border-white shadow-sm rounded-5 px-4 pt-3 bg-white", rows: 4, placeholder: "Tell us more about how you'd like to collaborate...", required: true %>
+            </div>
+            <div class="col-12 mt-5">
+              <%= f.submit "Initiate Partnership Inquiry", class: "btn btn-primary btn-lg d-block w-100 py-3 rounded-pill fw-bold shadow-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shadow-2xl { filter: drop-shadow(0 25px 25px rgba(0,0,0,0.1)); }
+  .ls-wide { letter-spacing: 0.1em; }
+  .icon-box-sm { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+</style>

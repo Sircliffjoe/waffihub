@@ -22,14 +22,15 @@ Rails.application.routes.draw do
     resources :payments, only: [ :index, :show ]
     resources :enrollments, only: [ :index, :show ]
     resources :inquiries, only: [ :index, :show, :destroy ]
+    resources :plans
+    resources :project_applications, only: [ :index, :show, :update, :destroy ]
+    resources :project_partnerships, only: [ :index, :show, :update, :destroy ]
   end
 
   # Public Routes
   root to: "pages#home"
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
-  get "impact", to: "pages#impact"
-  get "shebuilds", to: "pages#shebuilds"
 
   resources :programs, only: [ :index, :show ] do
     member do
@@ -38,13 +39,21 @@ Rails.application.routes.draw do
   end
   resources :services, only: [ :index, :show ]
   resources :posts, only: [ :index, :show ], path: "news"
-  resources :projects, only: [ :index, :show ], path: "our-work"
+  resources :projects, only: [ :index, :show ], path: "our-work" do
+    member do
+      get :apply
+      post :apply, to: "projects#submit_application"
+      get :partner
+      post :partner, to: "projects#submit_partnership"
+    end
+  end
   resources :payments, only: [ :new, :create ] do
     collection do
       get :callback
     end
   end
   resources :inquiries, only: [ :create ]
+  resources :bookings, only: [ :create ]
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

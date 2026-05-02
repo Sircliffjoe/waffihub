@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Partnership Inquiries</h1>
+</div>
+
+<div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>Organization</th>
+          <th>Project</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @partnerships.each do |partner| %>
+          <tr>
+            <td>
+              <div class="fw-bold"><%= partner.organization_name %></div>
+              <div class="small text-muted"><%= partner.contact_person %></div>
+            </td>
+            <td><span class="badge bg-info-subtle text-info rounded-pill px-3"><%= partner.project.name %></span></td>
+            <td><small class="fw-bold"><%= partner.partnership_type %></small></td>
+            <td>
+              <span class="badge rounded-pill px-3 bg-<%= partner.status == 'approved' ? 'success' : (partner.status == 'rejected' ? 'danger' : 'warning') %>-subtle text-<%= partner.status == 'approved' ? 'success' : (partner.status == 'rejected' ? 'danger' : 'warning') %> text-capitalize">
+                <%= partner.status %>
+              </span>
+            </td>
+            <td><%= partner.created_at.strftime("%b %d, %Y") %></td>
+            <td class="text-end">
+              <%= link_to "Review", admin_project_partnership_path(partner), class: "btn btn-outline-primary btn-sm rounded-pill px-3" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

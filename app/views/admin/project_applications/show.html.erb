@@ -1,0 +1,74 @@
+<div class="mb-4">
+  <%= link_to "← Back to Applications", admin_project_applications_path, class: "text-decoration-none small fw-bold" %>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-5 mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          <h6 class="text-primary-custom fw-bold text-uppercase ls-wide small mb-2">Application for <%= @application.project.name %></h6>
+          <h2 class="fw-bold mb-0"><%= @application.name %></h2>
+        </div>
+        <div class="text-end">
+          <span class="badge rounded-pill px-4 py-2 bg-<%= @application.status == 'approved' ? 'success' : (@application.status == 'rejected' ? 'danger' : 'warning') %>-subtle text-<%= @application.status == 'approved' ? 'success' : (@application.status == 'rejected' ? 'danger' : 'warning') %> text-capitalize">
+            <%= @application.status %>
+          </span>
+        </div>
+      </div>
+
+      <hr class="my-4 opacity-10">
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Email Address</label>
+          <div class="fw-bold"><%= @application.email %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Phone Number</label>
+          <div class="fw-bold"><%= @application.phone %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Location</label>
+          <div class="fw-bold"><%= @application.location %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Applied Date</label>
+          <div class="fw-bold"><%= @application.created_at.strftime("%B %d, %Y at %I:%M %p") %></div>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-2">Background & Experience</label>
+        <div class="p-4 bg-light rounded-4 text-muted" style="line-height: 1.7;">
+          <%= simple_format @application.background %>
+        </div>
+      </div>
+
+      <div>
+        <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-2">Motivation / Reason</label>
+        <div class="p-4 bg-light rounded-4 text-muted" style="line-height: 1.7;">
+          <%= simple_format @application.reason %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+      <h5 class="fw-bold mb-4">Update Status</h5>
+      <%= form_with model: [:admin, @application] do |f| %>
+        <div class="mb-4">
+          <%= f.select :status, ["pending", "approved", "rejected"], {}, class: "form-select rounded-pill px-3" %>
+        </div>
+        <%= f.submit "Update Application", class: "btn btn-primary w-100 rounded-pill fw-bold py-2" %>
+      <% end %>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 p-4 text-center">
+      <h6 class="fw-bold text-danger mb-3">Danger Zone</h6>
+      <p class="small text-muted mb-3">This action cannot be undone.</p>
+      <%= button_to "Delete Submission", admin_project_application_path(@application), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm w-100 rounded-pill" %>
+    </div>
+  </div>
+</div>

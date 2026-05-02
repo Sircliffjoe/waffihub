@@ -1,36 +1,80 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "Services", admin_services_path %></li>
-    <li class="breadcrumb-item active"><%= @service.title %></li>
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb bg-transparent p-0">
+    <li class="breadcrumb-item"><%= link_to "Services", admin_services_path, class: "text-decoration-none text-muted fw-semibold hover-text-primary" %></li>
+    <li class="breadcrumb-item active fw-bold text-dark" aria-current="page"><%= @service.title %></li>
   </ol>
 </nav>
 
-<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-  <h1 class="h3"><%= @service.title %></h1>
-  <div>
-    <%= link_to "Edit", edit_admin_service_path(@service), class: "btn btn-primary" %>
-    <%= link_to "Back", admin_services_path, class: "btn btn-outline-secondary ms-2" %>
+<div class="d-flex justify-content-between align-items-center mb-5">
+  <div class="d-flex align-items-center">
+    <div class="icon-box-sm bg-primary-custom text-white rounded-3 me-3 d-flex align-items-center justify-content-center shadow-sm" style="width: 50px; height: 50px; font-size: 1.5rem;">
+      <i class="bi bi-<%= @service.icon.presence || 'rocket-takeoff' %>"></i>
+    </div>
+    <h1 class="h2 fw-bold text-dark mb-0"><%= @service.title %></h1>
+  </div>
+  <div class="d-flex gap-2">
+    <%= link_to edit_admin_service_path(@service), class: "btn btn-primary rounded-pill px-4 shadow-sm fw-bold d-flex align-items-center" do %>
+      <i class="bi bi-pencil me-2"></i> Edit
+    <% end %>
+    <%= link_to admin_services_path, class: "btn btn-light rounded-pill px-4 shadow-sm fw-bold border d-flex align-items-center text-dark" do %>
+      <i class="bi bi-arrow-left me-2"></i> Back
+    <% end %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="card shadow-sm border-0 mb-4">
-      <div class="card-body">
-        <h5 class="card-title text-muted mb-3">Description</h5>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100">
+      <div class="card-header bg-white border-bottom py-3">
+        <h5 class="card-title fw-bold text-dark mb-0 d-flex align-items-center">
+          <i class="bi bi-file-text text-primary-custom me-2"></i> Description
+        </h5>
+      </div>
+      <div class="card-body p-4">
         <div class="rich-text-content">
           <%= @service.description %>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card shadow-sm border-0">
-      <div class="card-body">
-        <h5 class="card-title text-muted mb-3">Service Details</h5>
-        <p><strong>Category:</strong> <%= @service.category %></p>
-        <p><strong>Pricing:</strong> <%= @service.pricing.present? ? number_to_currency(@service.pricing, unit: "₦") : "Contact for pricing" %></p>
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+      <div class="card-header bg-white border-bottom py-3">
+        <h5 class="card-title fw-bold text-dark mb-0 d-flex align-items-center">
+          <i class="bi bi-info-circle text-info me-2"></i> Service Details
+        </h5>
+      </div>
+      <div class="card-body p-4">
+        <div class="mb-4">
+          <p class="text-muted fw-bold text-uppercase small ls-wide mb-1">Category</p>
+          <span class="badge bg-light text-primary-custom border rounded-pill px-3 py-2 fw-semibold fs-6">
+            <%= @service.category.presence || "Uncategorized" %>
+          </span>
+        </div>
+        <div class="mb-4">
+          <p class="text-muted fw-bold text-uppercase small ls-wide mb-1">Pricing</p>
+          <p class="h4 fw-bold text-dark mb-0">
+            <%= @service.pricing.present? ? number_to_currency(@service.pricing, unit: "₦") : "Contact for pricing" %>
+          </p>
+        </div>
+        <div>
+           <p class="text-muted fw-bold text-uppercase small ls-wide mb-1">Icon System</p>
+           <p class="text-dark fw-semibold mb-0"><i class="bi bi-<%= @service.icon.presence || 'rocket-takeoff' %> me-1"></i> <%= @service.icon.presence || "rocket-takeoff" %></p>
+        </div>
       </div>
     </div>
+
+    <% if @service.image.attached? %>
+      <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white border-bottom py-3">
+          <h5 class="card-title fw-bold text-dark mb-0 d-flex align-items-center">
+            <i class="bi bi-image text-success me-2"></i> Featured Image
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <%= image_tag @service.image, class: "img-fluid w-100", style: "object-fit: cover;" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

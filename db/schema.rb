@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_15_170153) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_163800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_170153) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "end_date"
+    t.bigint "plan_id", null: false
+    t.date "start_date"
+    t.string "status", default: "pending"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["plan_id"], name: "index_bookings_on_plan_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "enrollments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "program_id", null: false
@@ -80,13 +92,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_170153) do
     t.decimal "amount"
     t.datetime "created_at", null: false
     t.string "paystack_reference"
-    t.bigint "program_id", null: false
+    t.bigint "plan_id"
+    t.bigint "program_id"
     t.string "status"
     t.string "transaction_reference"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["plan_id"], name: "index_payments_on_plan_id"
     t.index ["program_id"], name: "index_payments_on_program_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.jsonb "features"
+    t.boolean "highlight"
+    t.string "interval"
+    t.string "name"
+    t.decimal "price"
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -108,16 +132,62 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_170153) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string "client"
+  create_table "project_applications", force: :cascade do |t|
+    t.text "background"
     t.datetime "created_at", null: false
+    t.string "email"
+    t.string "location"
     t.string "name"
+    t.string "phone"
+    t.bigint "project_id", null: false
+    t.text "reason"
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_applications_on_project_id"
+  end
+
+  create_table "project_partnerships", force: :cascade do |t|
+    t.string "contact_person"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.text "message"
+    t.string "organization_name"
+    t.string "partnership_type"
+    t.string "phone"
+    t.bigint "project_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_partnerships_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.text "about_description"
+    t.text "about_quote"
+    t.string "client"
+    t.string "cost"
+    t.datetime "created_at", null: false
+    t.text "curriculum_description"
+    t.string "curriculum_title"
+    t.string "duration"
+    t.string "format"
+    t.text "hero_description"
+    t.string "name"
+    t.jsonb "partnership_bullets"
+    t.text "partnership_description"
+    t.string "partnership_title"
+    t.string "reach"
+    t.string "tagline"
+    t.text "timeline_description"
+    t.jsonb "timeline_steps"
+    t.string "timeline_title"
+    t.jsonb "tracks"
     t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade do |t|
     t.string "category"
     t.datetime "created_at", null: false
+    t.string "icon"
     t.decimal "pricing"
     t.string "title"
     t.datetime "updated_at", null: false
@@ -146,8 +216,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_170153) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "plans"
+  add_foreign_key "bookings", "users"
   add_foreign_key "enrollments", "programs"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "payments", "plans"
   add_foreign_key "payments", "programs"
   add_foreign_key "payments", "users"
+  add_foreign_key "project_applications", "projects"
+  add_foreign_key "project_partnerships", "projects"
 end

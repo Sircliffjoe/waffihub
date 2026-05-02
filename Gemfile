@@ -68,5 +68,5 @@ group :test do
 end
 
 gem "devise", "~> 5.0"
-
 gem "paystack", "~> 0.1.10"
+gem "dotenv-rails", groups: [:development, :test]

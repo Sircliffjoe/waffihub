@@ -1,9 +1,9 @@
-<%= form_with(model: [:admin, service], class: "row g-3") do |f| %>
+<%= form_with(model: [:admin, service], class: "row g-4") do |f| %>
   <% if service.errors.any? %>
     <div class="col-12">
-      <div class="alert alert-danger">
-        <h4><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h4>
-        <ul>
+      <div class="alert alert-danger rounded-4 shadow-sm border-0">
+        <h4 class="h6 fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i> <%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h4>
+        <ul class="mb-0 mt-2 small">
           <% service.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
@@ -13,35 +13,45 @@
   <% end %>
 
   <div class="col-md-6">
-    <%= f.label :title, class: "form-label" %>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :title, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.text_field :title, class: "form-control form-control-lg border-light shadow-sm rounded-4 bg-white", placeholder: "e.g., Digital Transformation" %>
   </div>
 
   <div class="col-md-3">
-    <%= f.label :pricing, class: "form-label" %>
-    <div class="input-group">
-      <span class="input-group-text">₦</span>
-      <%= f.number_field :pricing, step: 0.01, class: "form-control" %>
+    <%= f.label :pricing, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <div class="input-group input-group-lg shadow-sm rounded-4 overflow-hidden">
+      <span class="input-group-text bg-white border-light text-muted fw-bold border-end-0">₦</span>
+      <%= f.number_field :pricing, step: 0.01, class: "form-control border-light border-start-0", placeholder: "500000.0" %>
     </div>
   </div>
 
   <div class="col-md-3">
-    <%= f.label :category, class: "form-label" %>
-    <%= f.select :category, ["Co-working and Training", "Startups/SMEs Business Services", "Private and Public Sector Innovation"], { include_blank: "Select Category" }, class: "form-select" %>
+    <%= f.label :category, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.select :category, ["Co-working and Training", "Startups/SMEs Business Services", "Private and Public Sector Innovation"], { include_blank: "Select Category" }, class: "form-select form-select-lg border-light shadow-sm rounded-4 bg-white" %>
+  </div>
+
+  <div class="col-md-6">
+    <%= f.label :image, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.file_field :image, class: "form-control form-control-lg border-light shadow-sm rounded-4 bg-white" %>
+  </div>
+
+  <div class="col-md-6">
+    <%= f.label :icon, "Bootstrap Icon Name (e.g., rocket-takeoff)", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <div class="input-group input-group-lg shadow-sm rounded-4 overflow-hidden">
+      <span class="input-group-text bg-white border-light text-muted border-end-0"><i class="bi bi-info-circle"></i></span>
+      <%= f.text_field :icon, class: "form-control border-light border-start-0", placeholder: "cpu" %>
+    </div>
   </div>
 
   <div class="col-12">
-    <%= f.label :image, class: "form-label" %>
-    <%= f.file_field :image, class: "form-control" %>
+    <%= f.label :description, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <div class="bg-white rounded-4 shadow-sm border border-light overflow-hidden p-2">
+      <%= f.rich_text_area :description, class: "form-control border-0", style: "min-height: 250px;" %>
+    </div>
   </div>
 
-  <div class="col-12">
-    <%= f.label :description, class: "form-label" %>
-    <%= f.rich_text_area :description, class: "form-control", style: "min-height: 200px;" %>
-  </div>
-
-  <div class="col-12 mt-4">
-    <%= f.submit class: "btn btn-primary" %>
-    <%= link_to "Cancel", admin_services_path, class: "btn btn-outline-secondary ms-2" %>
+  <div class="col-12 mt-4 pt-4 border-top">
+    <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm" %>
+    <%= link_to "Cancel", admin_services_path, class: "btn btn-light btn-lg border rounded-pill px-5 ms-3 fw-bold text-dark shadow-sm" %>
   </div>
 <% end %>

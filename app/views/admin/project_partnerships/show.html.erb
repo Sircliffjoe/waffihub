@@ -1,0 +1,67 @@
+<div class="mb-4">
+  <%= link_to "← Back to Partnerships", admin_project_partnerships_path, class: "text-decoration-none small fw-bold" %>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-5 mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          <h6 class="text-primary-custom fw-bold text-uppercase ls-wide small mb-2">Partnership for <%= @partnership.project.name %></h6>
+          <h2 class="fw-bold mb-0"><%= @partnership.organization_name %></h2>
+        </div>
+        <div class="text-end">
+          <span class="badge rounded-pill px-4 py-2 bg-<%= @partnership.status == 'approved' ? 'success' : (@partnership.status == 'rejected' ? 'danger' : 'warning') %>-subtle text-<%= @partnership.status == 'approved' ? 'success' : (@partnership.status == 'rejected' ? 'danger' : 'warning') %> text-capitalize">
+            <%= @partnership.status %>
+          </span>
+        </div>
+      </div>
+
+      <hr class="my-4 opacity-10">
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Contact Person</label>
+          <div class="fw-bold"><%= @partnership.contact_person %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Partnership Type</label>
+          <div class="badge bg-info-subtle text-info rounded-pill px-3"><%= @partnership.partnership_type %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Work Email</label>
+          <div class="fw-bold"><%= @partnership.email %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Phone Number</label>
+          <div class="fw-bold"><%= @partnership.phone %></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-2">Message / Context</label>
+        <div class="p-4 bg-light rounded-4 text-muted" style="line-height: 1.7;">
+          <%= simple_format @partnership.message %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+      <h5 class="fw-bold mb-4">Update Status</h5>
+      <%= form_with model: [:admin, @partnership] do |f| %>
+        <div class="mb-4">
+          <%= f.select :status, ["pending", "approved", "rejected"], {}, class: "form-select rounded-pill px-3" %>
+        </div>
+        <%= f.submit "Update Partnership", class: "btn btn-primary w-100 rounded-pill fw-bold py-2" %>
+      <% end %>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 p-4 text-center">
+      <h6 class="fw-bold text-danger mb-3">Danger Zone</h6>
+      <p class="small text-muted mb-3">This action cannot be undone.</p>
+      <%= button_to "Delete Inquiry", admin_project_partnership_path(@partnership), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm w-100 rounded-pill" %>
+    </div>
+  </div>
+</div>

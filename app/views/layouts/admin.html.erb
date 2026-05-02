@@ -6,6 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# Enable PWA manifest for installable apps (ensure config/routes.rb has the route) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path %>
+
+    <link rel="icon" type="image/png" href="<%= asset_path('icon.png') %>">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -26,7 +31,6 @@
 
       /* Sidebar Structure */
       .admin-wrapper {
-        display: flex;
         min-height: 100vh;
       }
 
@@ -55,8 +59,8 @@
       }
 
       .admin-content {
-        flex: 1;
         margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
         padding: 2.5rem;
         transition: all 0.3s ease;
       }
@@ -140,13 +144,16 @@
 
           <div class="nav-group-title">Core Operations</div>
           <%= link_to admin_programs_path, class: "sidebar-link #{'active' if controller_name == 'programs'}" do %>
-            <i class="bi bi-mortarboard"></i> Academy Programs
+            <i class="bi bi-mortarboard"></i> Programs
           <% end %>
           <%= link_to admin_enrollments_path, class: "sidebar-link #{'active' if controller_name == 'enrollments'}" do %>
-            <i class="bi bi-people"></i> Talent Roster
+            <i class="bi bi-people"></i> Enrollments
           <% end %>
           <%= link_to admin_services_path, class: "sidebar-link #{'active' if controller_name == 'services'}" do %>
-            <i class="bi bi-cpu"></i> Tech Services
+            <i class="bi bi-cpu"></i> Services
+          <% end %>
+          <%= link_to admin_plans_path, class: "sidebar-link #{'active' if controller_name == 'plans'}" do %>
+            <i class="bi bi-tags"></i> Pricing Plans
           <% end %>
 
           <div class="nav-group-title">Content HUB</div>
@@ -154,7 +161,15 @@
             <i class="bi bi-newspaper"></i> News & Insights
           <% end %>
           <%= link_to admin_projects_path, class: "sidebar-link #{'active' if controller_name == 'projects'}" do %>
-            <i class="bi bi-kanban"></i> Flagship Projects
+            <i class="bi bi-kanban"></i> Projects
+          <% end %>
+
+          <div class="nav-group-title">Project Submissions</div>
+          <%= link_to admin_project_applications_path, class: "sidebar-link #{'active' if controller_name == 'project_applications'}" do %>
+            <i class="bi bi-person-plus"></i> Applications
+          <% end %>
+          <%= link_to admin_project_partnerships_path, class: "sidebar-link #{'active' if controller_name == 'project_partnerships'}" do %>
+            <i class="bi bi-briefcase"></i> Project Partnerships
           <% end %>
 
           <div class="nav-group-title">Ecosystem</div>
@@ -162,7 +177,7 @@
             <i class="bi bi-person-badge"></i> The Team
           <% end %>
           <%= link_to admin_partnerships_path, class: "sidebar-link #{'active' if controller_name == 'partnerships'}" do %>
-            <i class="bi bi-handshake"></i> Partnerships
+            <i class="bi bi-people"></i> Partnerships
           <% end %>
           <%= link_to admin_inquiries_path, class: "sidebar-link #{'active' if controller_name == 'inquiries'}" do %>
             <i class="bi bi-chat-dots"></i> Community Inbox
@@ -176,7 +191,7 @@
             </div>
             <div class="overflow-hidden">
               <div class="text-white small fw-bold text-truncate"><%= current_user.email %></div>
-              <div class="extra-small text-muted">System Administrator</div>
+              <div class="small text-white">System Administrator</div>
             </div>
           </div>
           <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm w-100 rounded-pill small" %>

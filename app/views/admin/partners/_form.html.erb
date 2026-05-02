@@ -1,0 +1,56 @@
+<%= form_with(model: [:admin, partner], class: "row g-4") do |f| %>
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5">
+      <div class="row g-4">
+        <div class="col-12">
+          <%= f.label :name, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :name, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "Partner Organization Name", required: true %>
+        </div>
+
+        <div class="col-md-8">
+          <%= f.label :website_url, "Website URL", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.url_field :website_url, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "https://example.com" %>
+        </div>
+
+        <div class="col-md-4">
+          <%= f.label :position, "Display Order", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.number_field :position, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "1" %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :logo, "Partner Logo", class: "form-label fw-bold text-muted text-uppercase small ls-wide d-block" %>
+          <div class="p-4 bg-light rounded-4 border-2 border-dashed text-center">
+            <% if partner.logo.attached? %>
+              <div class="mb-3">
+                <%= image_tag partner.logo, class: "img-fluid rounded border shadow-sm", style: "max-height: 100px;" %>
+              </div>
+            <% end %>
+            <%= f.file_field :logo, class: "form-control border-0 bg-white rounded-pill", accept: 'image/*' %>
+            <div class="mt-2 text-muted small">Recommended: PNG or SVG with transparent background</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 d-flex gap-3">
+      <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg" %>
+      <%= link_to "Cancel", admin_partners_path, class: "btn btn-outline-secondary btn-lg rounded-pill px-5" %>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 bg-primary-custom text-white">
+      <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb me-2"></i> Quick Tips</h5>
+      <ul class="list-unstyled small mb-0 opacity-75">
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> Use high-quality logos with transparent backgrounds.</li>
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> Partners with lower "Display Order" numbers will appear first.</li>
+        <li><i class="bi bi-check2-circle me-2"></i> Providing a website URL allows users to click the logo on the homepage.</li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<style>
+  .border-dashed { border-style: dashed !important; }
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

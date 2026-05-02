@@ -1,0 +1,77 @@
+<div class="mb-4">
+  <%= link_to admin_partners_path, class: "text-decoration-none small fw-bold" do %>
+    <i class="bi bi-arrow-left me-1"></i> Back to List
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-5 mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          <h6 class="text-primary-custom fw-bold text-uppercase ls-wide small mb-2">Strategic Partner</h6>
+          <h2 class="fw-bold mb-0"><%= @partner.name %></h2>
+        </div>
+        <div class="text-end">
+          <div class="small text-muted mb-1">Display Order</div>
+          <span class="badge bg-light text-dark border rounded-pill px-3">#<%= @partner.position %></span>
+        </div>
+      </div>
+
+      <hr class="my-4 opacity-10">
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Website URL</label>
+          <% if @partner.website_url.present? %>
+            <a href="<%= @partner.website_url %>" target="_blank" class="fw-bold text-primary-custom">
+              <%= @partner.website_url %> <i class="bi bi-box-arrow-up-right ms-1 small"></i>
+            </a>
+          <% else %>
+            <span class="text-muted">Not provided</span>
+          <% end %>
+        </div>
+        <div class="col-md-6 text-md-end">
+           <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Date Added</label>
+           <div class="fw-bold text-muted"><%= @partner.created_at.strftime("%B %d, %Y") %></div>
+        </div>
+      </div>
+
+      <div class="p-5 bg-light rounded-4 text-center">
+        <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-4">Partner Logo</label>
+        <% if @partner.logo.attached? %>
+          <%= image_tag @partner.logo, class: "img-fluid rounded border shadow-sm p-3 bg-white", style: "max-height: 120px; object-fit: contain;" %>
+        <% else %>
+          <div class="text-muted small italic">No logo uploaded yet.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mb-4 text-center">
+      <h5 class="fw-bold mb-4">Management</h5>
+      <div class="d-grid gap-2">
+        <%= link_to edit_admin_partner_path(@partner), class: "btn btn-primary rounded-pill fw-bold" do %>
+          <i class="bi bi-pencil-square me-2"></i> Edit Details
+        <% end %>
+        <hr class="my-3 opacity-10">
+        <%= button_to admin_partner_path(@partner), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm rounded-pill" do %>
+          <i class="bi bi-trash me-2"></i> Delete Partner
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="card shadow-sm border-0 rounded-4 p-4 bg-primary-custom text-white small">
+       <div class="d-flex align-items-center mb-3">
+         <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+         <h6 class="fw-bold mb-0">Logo Display</h6>
+       </div>
+       <p class="mb-0 opacity-75">This partner will appear on the homepage and about page logo clouds. Use the "Edit" button to change the display order if you want to rearrange the logos.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

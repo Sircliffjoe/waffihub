@@ -1,0 +1,8 @@
+<div class="mb-4">
+  <%= link_to admin_partners_path, class: "text-decoration-none small fw-bold" do %>
+    <i class="bi bi-arrow-left me-1"></i> Back to List
+  <% end %>
+  <h1 class="h3 mt-2">New Strategic Partner</h1>
+</div>
+
+<%= render "form", partner: @partner %>

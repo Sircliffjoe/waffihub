@@ -1,34 +1,90 @@
-<%= form_with(model: [:admin, project], class: "row g-3") do |f| %>
-  <div class="col-md-6">
-    <%= f.label :name, class: "form-label" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  <div class="col-md-6">
-    <%= f.label :client, class: "form-label" %>
-    <%= f.text_field :client, class: "form-control" %>
-  </div>
-  <div class="col-12">
-    <%= f.label :images, "Project Images", class: "form-label" %>
-    <%= f.file_field :images, multiple: true, class: "form-control" %>
+<%= form_with(model: [:admin, project], class: "row g-4") do |f| %>
+  <% if project.errors.any? %>
+    <div class="col-12">
+      <div class="alert alert-danger rounded-4 border-0 shadow-sm">
+        <h5 class="fw-bold"><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h5>
+        <ul class="mb-0">
+          <% project.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 mb-4">
+      <div class="row g-4">
+        <div class="col-md-12">
+          <%= f.label :name, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :name, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4 fw-bold", placeholder: "Project Name" %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :problem, "The Challenge / Problem", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <div class="bg-light rounded-4 p-2">
+            <%= f.rich_text_area :problem, class: "form-control border-0 bg-transparent", style: "min-height: 200px;" %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :solution, "The Approach / Solution", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <div class="bg-light rounded-4 p-2">
+            <%= f.rich_text_area :solution, class: "form-control border-0 bg-transparent", style: "min-height: 200px;" %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :outcome, "Final Outcome / Impact", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <div class="bg-light rounded-4 p-2">
+            <%= f.rich_text_area :outcome, class: "form-control border-0 bg-transparent", style: "min-height: 200px;" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-3 mt-4">
+      <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg" %>
+      <%= link_to "Cancel", admin_projects_path, class: "btn btn-outline-secondary btn-lg rounded-pill px-5" %>
+    </div>
   </div>
 
-  <div class="col-12">
-    <%= f.label :problem, class: "form-label" %>
-    <%= f.rich_text_area :problem, class: "form-control", style: "min-height: 150px;" %>
-  </div>
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+      <h6 class="fw-bold text-uppercase ls-wide small mb-4">Project Metadata</h6>
+      
+      <div class="mb-4">
+        <%= f.label :client, "Beneficiary / Client", class: "form-label small fw-bold text-muted" %>
+        <%= f.text_field :client, class: "form-control border-0 bg-light rounded-pill px-4", placeholder: "e.g. World Bank, Niger Delta Commission" %>
+      </div>
 
-  <div class="col-12">
-    <%= f.label :solution, class: "form-label" %>
-    <%= f.rich_text_area :solution, class: "form-control", style: "min-height: 150px;" %>
-  </div>
+      <div class="mb-0">
+        <%= f.label :images, "Project Gallery", class: "form-label small fw-bold text-muted d-block" %>
+        <div class="p-3 bg-light rounded-4 border-2 border-dashed text-center">
+          <% if project.images.attached? %>
+            <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center">
+              <% project.images.each do |image| %>
+                <%= image_tag image, class: "rounded border shadow-sm", style: "width: 60px; height: 60px; object-fit: cover;" %>
+              <% end %>
+            </div>
+          <% end %>
+          <%= f.file_field :images, multiple: true, class: "form-control border-0 bg-white rounded-pill", accept: 'image/*' %>
+          <div class="mt-2 extra-small text-muted">Select multiple images for the gallery</div>
+        </div>
+      </div>
+    </div>
 
-  <div class="col-12">
-    <%= f.label :outcome, class: "form-label" %>
-    <%= f.rich_text_area :outcome, class: "form-control", style: "min-height: 150px;" %>
-  </div>
-
-  <div class="col-12 mt-4">
-    <%= f.submit class: "btn btn-primary" %>
-    <%= link_to "Cancel", admin_projects_path, class: "btn btn-outline-secondary ms-2" %>
+    <div class="card shadow-sm border-0 rounded-4 p-4 bg-primary-custom text-white">
+      <h6 class="fw-bold mb-3"><i class="bi bi-lightbulb me-2"></i> Showcase Tip</h6>
+      <p class="small opacity-75 mb-0">Break down your project into Problem, Solution, and Outcome to clearly communicate the impact of WaffiHub's interventions.</p>
+    </div>
   </div>
 <% end %>
+
+<style>
+  .border-dashed { border-style: dashed !important; }
+  .ls-wide { letter-spacing: 0.1em; }
+  .extra-small { font-size: 0.7rem; }
+  trix-editor { border: none !important; background: transparent !important; }
+  trix-toolbar .trix-button-group { border-color: rgba(0,0,0,0.05) !important; margin-bottom: 10px !important; }
+</style>

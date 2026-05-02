@@ -4,14 +4,14 @@ class PagesController < ApplicationController
     @featured_programs = Program.limit(3).order(created_at: :desc)
     @featured_services = Service.limit(3)
     @latest_posts = Post.limit(3).order(published_at: :desc)
-    @partners = Partnership.all
     @plans = Plan.all.order(price: :asc)
+    @partners = Partner.all.order(position: :asc)
   end
 
   def about
     @page_title = "About Our Hub"
     @team_members = TeamMember.all
-    @partners = Partnership.all
+    @partners = Partner.all.order(position: :asc)
   end
 
   def contact

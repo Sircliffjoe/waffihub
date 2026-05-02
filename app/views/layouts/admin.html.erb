@@ -120,6 +120,84 @@
         border-top: 1px solid rgba(255,255,255,0.05);
       }
 
+      /* Trix Editor Fixes */
+      trix-toolbar {
+        border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+        padding: 10px 0 !important;
+        margin-bottom: 10px !important;
+      }
+      trix-toolbar .trix-button-group {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        margin-bottom: 5px !important;
+        background: white !important;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      trix-toolbar .trix-button {
+        border: none !important;
+        border-right: 1px solid #e2e8f0 !important;
+        background: white !important;
+        padding: 8px 12px !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: #64748b !important;
+      }
+      trix-toolbar .trix-button:last-child { border-right: none !important; }
+      trix-toolbar .trix-button:hover { background: #f8fafc !important; color: #3b82f6 !important; }
+      trix-toolbar .trix-button--active { background: #eff6ff !important; color: #3b82f6 !important; }
+      
+      /* Force toolbar to wrap instead of stretching */
+      trix-toolbar .trix-button-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+      }
+
+      /* Hide text labels on buttons that should have icons, or just ensure they wrap */
+      trix-editor {
+        border: none !important;
+        outline: none !important;
+        padding: 1rem !important;
+        min-height: 300px;
+        color: #334155 !important;
+        line-height: 1.6 !important;
+      }
+
+      /* Hide text labels and show only icons */
+      trix-toolbar .trix-button {
+        font-size: 0 !important; /* Hide text */
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+      }
+      
+      /* Ensure icons are visible and centered */
+      trix-toolbar .trix-button::before {
+        font-size: 1.1rem !important;
+        color: inherit !important;
+      }
+
+      /* Fix for Trix's specific icon buttons */
+      trix-toolbar .trix-button--icon-bold::before { content: "B" !important; font-weight: 900 !important; font-size: 1rem !important; }
+      trix-toolbar .trix-button--icon-italic::before { content: "I" !important; font-style: italic !important; font-size: 1rem !important; }
+      trix-toolbar .trix-button--icon-strike::before { content: "S" !important; text-decoration: line-through !important; font-size: 1rem !important; }
+      trix-toolbar .trix-button--icon-link::before { content: "\f207" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-heading-1::before { content: "H" !important; font-size: 1.1rem !important; }
+      trix-toolbar .trix-button--icon-quote::before { content: "\f491" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-code::before { content: "\f2c8" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-bullet-list::before { content: "\f46d" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-number-list::before { content: "\f48a" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-undo::before { content: "\f12a" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-redo::before { content: "\f22d" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-decrease-nesting-level::before { content: "\f12d" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-increase-nesting-level::before { content: "\f12e" !important; font-family: "bootstrap-icons" !important; }
+      trix-toolbar .trix-button--icon-attach::before { content: "\f4f0" !important; font-family: "bootstrap-icons" !important; }
+
       @media (max-width: 992px) {
         .admin-sidebar { margin-left: calc(-1 * var(--sidebar-width)); }
         .admin-content { margin-left: 0; padding: 1.5rem; }
@@ -176,8 +254,8 @@
           <%= link_to admin_team_members_path, class: "sidebar-link #{'active' if controller_name == 'team_members'}" do %>
             <i class="bi bi-person-badge"></i> The Team
           <% end %>
-          <%= link_to admin_partnerships_path, class: "sidebar-link #{'active' if controller_name == 'partnerships'}" do %>
-            <i class="bi bi-people"></i> Partnerships
+          <%= link_to admin_partners_path, class: "sidebar-link #{'active' if controller_name == 'partners'}" do %>
+            <i class="bi bi-briefcase"></i> Strategic Partners
           <% end %>
           <%= link_to admin_inquiries_path, class: "sidebar-link #{'active' if controller_name == 'inquiries'}" do %>
             <i class="bi bi-chat-dots"></i> Community Inbox

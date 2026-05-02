@@ -52,12 +52,10 @@
 <%# 3. NEWS ARCHIVE GRID %>
 <section class="py-8 bg-light overflow-hidden">
   <div class="container">
-    <div class="row align-items-end mb-7" data-aos="fade-up">
+    <div class="row align-items-end" style="margin-bottom: 40px;" data-aos="fade-up">
       <div class="col-lg-7">
         <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">The Archive</h6>
         <h2 class="display-5 fw-bold mb-0">Recent Announcements</h2>
-      </div>
-      <div class="col-lg-5 text-lg-end">
         <p class="text-muted small fw-semibold mb-0">Stay informed with the latest hub activities.</p>
       </div>
     </div>
@@ -65,26 +63,23 @@
     <div class="row g-5">
       <% @posts.offset(1).each_with_index do |post, i| %>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
-          <article class="card h-100 border-0 shadow-lg rounded-5 overflow-hidden transition-hover bg-white">
-            <div class="aspect-ratio-box" style="height: 220px; overflow: hidden;">
+          <article class="h-100 transition-hover rounded-5 p-2 card border-0">
+            <div class="mb-4 overflow-hidden rounded-5 shadow-sm" style="height: 260px;">
               <% if post.featured_image.attached? %>
-                 <%= link_to post_path(post.slug) do %>
-                   <%= image_tag post.featured_image, class: "card-img-top h-100 w-100", style: "object-fit: cover;" %>
-                 <% end %>
+                <%= link_to post_path(post.slug) do %>
+                  <%= image_tag post.featured_image, class: "img-fluid h-100 w-100 transition-all", style: "object-fit: cover;" %>
+                <% end %>
               <% else %>
-                 <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800" class="card-img-top h-100 w-100" style="object-fit: cover;" alt="News">
+                <%= link_to post_path(post.slug), class: "d-block h-100" do %>
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800" class="img-fluid h-100 w-100" style="object-fit: cover;" alt="News">
+                <% end %>
               <% end %>
             </div>
-            <div class="card-body p-5 d-flex flex-column h-100">
-              <div class="mb-3 d-flex justify-content-between align-items-center">
-                <time class="text-muted extra-small text-uppercase fw-bold ls-wide"><%= post.published_at.strftime("%B %d, %Y") %></time>
-                <i class="bi bi-bookmark text-primary-custom opacity-25"></i>
-              </div>
-              <h3 class="h5 fw-bold mb-3"><%= link_to post.title, post_path(post.slug), class: "text-dark text-decoration-none hover-primary" %></h3>
-              <p class="text-muted small mb-4 flex-grow-1"><%= truncate(strip_tags(post.content.to_s), length: 140) %></p>
-              <div class="mt-auto pt-4 border-top">
-                <%= link_to "Read More →", post_path(post.slug), class: "text-primary-custom text-decoration-none fw-bold small transition-all" %>
-              </div>
+            <div class="px-3 pb-3">
+              <time class="text-muted small fw-bold d-block mb-2 text-uppercase ls-wide"><%= post.published_at.strftime("%B %d, %Y") %></time>
+              <h4 class="fw-bold mb-3"><%= link_to post.title, post_path(post.slug), class: "text-dark text-decoration-none hover-primary" %></h4>
+              <p class="text-muted small mb-4"><%= truncate(strip_tags(post.content.to_s), length: 130) %></p>
+              <%= link_to "Read Article →", post_path(post.slug), class: "link-primary text-decoration-none fw-bold small transition-all" %>
             </div>
           </article>
         </div>

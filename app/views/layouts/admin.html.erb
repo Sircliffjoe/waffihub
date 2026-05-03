@@ -197,17 +197,90 @@
       trix-toolbar .trix-button--icon-decrease-nesting-level::before { content: "\f12d" !important; font-family: "bootstrap-icons" !important; }
       trix-toolbar .trix-button--icon-increase-nesting-level::before { content: "\f12e" !important; font-family: "bootstrap-icons" !important; }
       trix-toolbar .trix-button--icon-attach::before { content: "\f4f0" !important; font-family: "bootstrap-icons" !important; }
+      .admin-content {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+        min-height: 100vh;
+      }
+
+      /* Mobile Header */
+      .admin-mobile-header {
+        display: none;
+        background-color: var(--sidebar-bg);
+        color: white;
+        padding: 0.75rem 1.25rem;
+        position: sticky;
+        top: 0;
+        z-index: 1010;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
 
       @media (max-width: 992px) {
-        .admin-sidebar { margin-left: calc(-1 * var(--sidebar-width)); }
-        .admin-content { margin-left: 0; padding: 1.5rem; }
-        .admin-sidebar.show { margin-left: 0; }
+        .admin-sidebar { 
+          margin-left: calc(-1 * var(--sidebar-width)); 
+          height: 100%;
+          position: fixed;
+        }
+        .admin-content { 
+          margin-left: 0 !important; 
+          width: 100% !important;
+          padding: 1.25rem !important; 
+        }
+        .admin-sidebar.show { 
+          margin-left: 0 !important; 
+        }
+        .admin-mobile-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
+        }
+        /* Overlay when sidebar is open */
+        .sidebar-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.6);
+          backdrop-filter: blur(4px);
+          z-index: 999;
+        }
+        .sidebar-overlay.show {
+          display: block;
+        }
+
+        /* Stack buttons on mobile */
+        .admin-content .d-flex.gap-2, 
+        .admin-content .d-flex.gap-3 {
+          flex-direction: column !important;
+        }
+        .admin-content .d-flex.gap-2 > *, 
+        .admin-content .d-flex.gap-3 > * {
+          width: 100% !important;
+          margin-bottom: 0.5rem !important;
+          justify-content: center !important;
+        }
+        .admin-content h1.h2 {
+          font-size: 1.5rem !important;
+        }
       }
     </style>
   </head>
-
+ 
   <body>
     <div class="admin-wrapper">
+      <div class="admin-mobile-header px-3">
+        <h5 class="text-white fw-bold mb-0">WaffiHub <span class="text-info">CMS</span></h5>
+        <button class="btn btn-dark border-0 rounded-circle" onclick="document.querySelector('.admin-sidebar').classList.toggle('show'); document.querySelector('.sidebar-overlay').classList.toggle('show');">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+      </div>
+      <div class="sidebar-overlay" onclick="document.querySelector('.admin-sidebar').classList.remove('show'); this.classList.remove('show');"></div>
+
       <%# SIDEBAR %>
       <aside class="admin-sidebar shadow-lg">
         <div class="sidebar-brand">

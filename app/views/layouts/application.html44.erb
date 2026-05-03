@@ -38,16 +38,16 @@
         --body-font: 'Inter', sans-serif;
         --heading-font: 'Outfit', sans-serif;
       }
-      body { 
-        font-family: var(--body-font); 
-        color: #333; 
+      html, body {
         overflow-x: hidden;
         width: 100%;
         position: relative;
       }
-      html {
-        overflow-x: hidden;
-        width: 100%;
+      body { 
+        font-family: var(--body-font); 
+        color: #333; 
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); font-weight: 700; color: #1A1A1A; }
       .bg-primary-custom { background-color: var(--primary-color) !important; }
@@ -55,24 +55,51 @@
       .navbar-brand { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
       .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
       .btn-primary:hover { background-color: #2C3E50; border-color: #2C3E50; }
+      
+      /* Prevent AOS from causing horizontal scroll */
+      [data-aos] {
+        max-width: 100vw;
+      }
+
+      /* Aggressive Mobile Overflow Fixes */
+      section, .container, .container-fluid, .row {
+        max-width: 100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        padding-right: var(--bs-gutter-x, 0.75rem);
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        overflow-x: hidden;
+      }
+      
+      .row {
+        margin-right: calc(-0.5 * var(--bs-gutter-x)) !important;
+        margin-left: calc(-0.5 * var(--bs-gutter-x)) !important;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
   </head>
 
-  <body>
-    <%= render "shared/navbar" %>
+  <body class="d-flex flex-column min-vh-100">
+    <div id="site-wrapper" style="overflow-x: hidden; width: 100%; position: relative;">
+      <%= render "shared/navbar" %>
 
-    <main>
-      <% if notice %>
-        <div class="alert alert-info border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= notice %></div>
-      <% end %>
-      <% if alert %>
-        <div class="alert alert-danger border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= alert %></div>
-      <% end %>
+      <main>
+        <% if notice %>
+          <div class="alert alert-info border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger border-0 rounded-0 mb-0 py-2 text-center small shadow-sm position-relative" style="z-index: 1050;"><%= alert %></div>
+        <% end %>
 
-      <%= yield %>
-    </main>
+        <%= yield %>
+      </main>
 
-    <%= render "shared/footer" %>
+      <%= render "shared/footer" %>
+    </div>
 
     <script>
       document.addEventListener('turbo:load', () => {

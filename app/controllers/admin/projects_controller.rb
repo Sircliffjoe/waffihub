@@ -44,6 +44,28 @@ class Admin::ProjectsController < Admin::BaseController
   end
 
   def project_params
-    params.require(:project).permit(:name, :client, :problem, :solution, :outcome, images: [])
+    permitted = params.require(:project).permit(
+      :name, :client, :tagline, :hero_description, :main_image,
+      :duration, :format, :reach, :cost,
+      :about_description, :about_quote,
+      :problem, :solution, :outcome,
+      :curriculum_title, :curriculum_description,
+      :timeline_title, :timeline_description,
+      :partnership_title, :partnership_description,
+      images: []
+    )
+
+    # Parse JSON fields from hidden inputs
+    if params[:project][:tracks].present?
+      permitted[:tracks] = JSON.parse(params[:project][:tracks]) rescue []
+    end
+    if params[:project][:timeline_steps].present?
+      permitted[:timeline_steps] = JSON.parse(params[:project][:timeline_steps]) rescue []
+    end
+    if params[:project][:partnership_bullets].present?
+      permitted[:partnership_bullets] = JSON.parse(params[:project][:partnership_bullets]) rescue []
+    end
+
+    permitted
   end
 end

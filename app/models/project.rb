@@ -8,5 +8,4 @@ class Project < ApplicationRecord
   has_many_attached :images
 
   validates :name, presence: true
-  validates :client, presence: true
 end

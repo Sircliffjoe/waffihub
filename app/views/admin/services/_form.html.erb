@@ -31,8 +31,22 @@
   </div>
 
   <div class="col-md-6">
-    <%= f.label :image, class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+    <%= f.label :image, "Main Thumbnail Image", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
     <%= f.file_field :image, class: "form-control form-control-lg border-light shadow-sm rounded-4 bg-white" %>
+  </div>
+
+  <div class="col-md-6">
+    <%= f.label :images, "Gallery Images (Max 4)", class: "form-label text-muted fw-bold text-uppercase small ls-wide d-block" %>
+    <div class="p-3 bg-white rounded-4 shadow-sm border border-light text-center">
+      <% if service.persisted? && service.images.attached? %>
+        <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center">
+          <% service.images.each do |img| %>
+            <%= image_tag img, class: "rounded border shadow-sm", style: "width: 60px; height: 60px; object-fit: cover;" %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= f.file_field :images, multiple: true, class: "form-control border-light bg-light rounded-pill", accept: 'image/*' %>
+    </div>
   </div>
 
   <div class="col-md-6">
@@ -40,6 +54,18 @@
     <div class="input-group input-group-lg shadow-sm rounded-4 overflow-hidden">
       <span class="input-group-text bg-white border-light text-muted border-end-0"><i class="bi bi-info-circle"></i></span>
       <%= f.text_field :icon, class: "form-control border-light border-start-0", placeholder: "cpu" %>
+    </div>
+  </div>
+
+  <div class="col-md-6 d-flex align-items-center mt-md-5">
+    <div class="form-check form-switch card p-3 border-light shadow-sm rounded-4 w-100 mb-0">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <%= f.label :show_pricing, "Include Pricing Section", class: "form-check-label fw-bold text-primary-custom" %>
+          <div class="small text-muted">Show co-working plans at the bottom of the page</div>
+        </div>
+        <%= f.check_box :show_pricing, class: "form-check-input h4 mb-0" %>
+      </div>
     </div>
   </div>
 

@@ -44,6 +44,6 @@ class Admin::ServicesController < Admin::BaseController
   end
 
   def service_params
-    params.require(:service).permit(:title, :pricing, :category, :icon, :description, :image)
+    params.require(:service).permit(:title, :pricing, :category, :icon, :description, :image, :show_pricing, images: [])
   end
 end

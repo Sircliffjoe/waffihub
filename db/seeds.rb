@@ -11,12 +11,12 @@ puts "Admin created: admin@waffihub.ng / waffii@2020!!"
 
 # Programs with Images
 programs_data = [
-  { title: 'Software Development', price: 150000, duration: '12 Weeks', img_id: '1587629984606-2531ada03976' },
+  { title: 'Software Development', price: 150000, duration: '12 Weeks', img_id: '1531482615713-2afd69097998' },
   { title: 'Data Analysis & Virtualization', price: 150000, duration: '8 Weeks', img_id: '1551288049-bbda38a10ad5' },
   { title: 'UI/UX Design', price: 120000, duration: '8 Weeks', img_id: '1586717791821-3f44a563eb4c' },
-  { title: 'WordPress Development', price: 100000, duration: '8 Weeks', img_id: '1587629984606-2531ada03976' },
-  { title: 'Microsoft Office Suite', price: 80000, duration: '8 Weeks', img_id: '1551288049-bbda38a10ad5' },
-  { title: 'Digital Marketing', price: 120000, duration: '8 Weeks', img_id: '1586717791821-3f44a563eb4c' }
+  { title: 'WordPress Development', price: 100000, duration: '8 Weeks', img_id: '1461749280684-dccba630e2f6' },
+  { title: 'Microsoft Office Suite', price: 80000, duration: '8 Weeks', img_id: '1497215728101-856f4ea42174' },
+  { title: 'Digital Marketing', price: 120000, duration: '8 Weeks', img_id: '1460925895917-afdab827c52f' }
 ]
 
 programs_data.each do |data|
@@ -46,25 +46,25 @@ team_data = [
     name: 'Paul Okoro', 
     role: 'CEO & Founder', 
     bio: 'A visionary leader with 15+ years in tech ecosystem building, dedicated to scaling Nigerian startups.', 
-    img_id: '1560298814-14f964a440b2' 
+    img_id: '1560250097-0b93528c311a' 
   },
   { 
     name: 'Ettah Clifford', 
     role: 'Hub Manager', 
-    bio: 'A results-driven full-stack engineer and ecosystem builder with a strong track record in managing innovation hubs and supporting early-stage startups. Clifford combines technical expertise with strategic thinking to design impactful programs, mentor emerging talent, and drive digital transformation across communities.', 
-    img_id: '1500648767-99cd02c8944d' 
+    bio: 'A results-driven full-stack engineer and ecosystem builder with a strong track record in managing innovation hubs and supporting early-stage startups.', 
+    img_id: '1507003211169-0a1dd7228f2d' 
   },
   { 
     name: 'Jahsmine Aninta', 
     role: 'Head of Operations', 
-    bio: 'A highly organized operations leader with deep experience in vocational training and program management. Jahsmine ensures the seamless delivery of training initiatives by optimizing processes, coordinating resources, and maintaining high standards that empower learners with practical, industry-relevant skills.', 
-    img_id: '1494790108377-be9c29b29330' 
+    bio: 'A highly organized operations leader with deep experience in vocational training and program management.', 
+    img_id: '1573496359142-b8d87734a5a2' 
   },
   { 
     name: 'Sophia Akpofure', 
     role: 'Community Manager', 
-    bio: 'A dynamic community builder focused on fostering engagement, collaboration, and growth within the ecosystem. Sophia specializes in creating meaningful experiences for members, managing stakeholder relationships, and driving initiatives that strengthen community participation and long-term impact.', 
-    img_id: '1500648767-99cd02c8944d' 
+    bio: 'A dynamic community builder focused on fostering engagement, collaboration, and growth within the ecosystem.', 
+    img_id: '1580489944761-15a19d654956' 
   }
 ]
 
@@ -85,9 +85,9 @@ puts "Team Members seeded."
 # Projects for Impact (Demo Content)
 # Project.destroy_all (Disabled for production safety)
 projects_data = [
-  { name: 'Youth Digital Literacy Drive', client: 'Delta State Government', img_id: '1531482615713-2afd69097998' },
+  { name: 'Youth Digital Literacy Drive', client: 'Delta State Government', img_id: '1509062522246-37399d4a414f' },
   { name: 'Startup Incubation Cohort 2025', client: 'WaffiHub Ventures', img_id: '1552664730-d307ca884978' },
-  { name: 'Tech In Schools Initiative', client: 'Private Donors', img_id: '1509062522246-37399d4a414f' }
+  { name: 'Tech In Schools Initiative', client: 'Private Donors', img_id: '1503676260728-1c00da096a0b' }
 ]
 
 projects_data.each do |data|

@@ -40,14 +40,7 @@ Rails.application.routes.draw do
   end
   resources :services, only: [ :index, :show ]
   resources :posts, only: [ :index, :show ], path: "news"
-  resources :projects, only: [ :index, :show ], path: "our-work" do
-    member do
-      get :apply
-      post :apply, to: "projects#submit_application"
-      get :partner
-      post :partner, to: "projects#submit_partnership"
-    end
-  end
+  resources :projects, only: [ :index ], path: "our-work"
   resources :payments, only: [ :new, :create ] do
     collection do
       get :callback
@@ -68,4 +61,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  # Top-level Project Slugs (keep at bottom to avoid conflicts)
+  get ":id", to: "projects#show", as: :project
+  get ":id/apply", to: "projects#apply", as: :apply_project
+  post ":id/apply", to: "projects#submit_application"
+  get ":id/partner", to: "projects#partner", as: :partner_project
+  post ":id/partner", to: "projects#submit_partnership"
 end

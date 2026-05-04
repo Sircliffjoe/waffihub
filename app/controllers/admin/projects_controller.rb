@@ -46,7 +46,7 @@ class Admin::ProjectsController < Admin::BaseController
   def project_params
     permitted = params.require(:project).permit(
       :name, :client, :tagline, :hero_description, :main_image,
-      :duration, :format, :reach, :cost,
+      :duration, :format, :reach, :cost, :slug,
       :about_description, :about_quote,
       :problem, :solution, :outcome,
       :curriculum_title, :curriculum_description,

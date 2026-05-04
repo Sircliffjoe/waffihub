@@ -4,7 +4,7 @@ require 'open-uri'
 # Create Admin User
 admin = User.find_or_create_by!(email: 'admin@waffihub.ng') do |u|
   u.password = 'waffii@2020!!'
-  u.password_confirmation = 'waffi@2020!!'
+  u.password_confirmation = 'waffii@2020!!'
   u.admin = true
 end
 puts "Admin created: admin@waffihub.ng / waffii@2020!!"

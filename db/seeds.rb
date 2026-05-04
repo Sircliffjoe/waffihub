@@ -12,11 +12,11 @@ puts "Admin created: admin@waffihub.ng / waffii@2020!!"
 # Programs with Images
 programs_data = [
   { title: 'Software Development', price: 150000, duration: '12 Weeks', img_id: '1531482615713-2afd69097998' },
-  { title: 'Data Analysis & Virtualization', price: 150000, duration: '8 Weeks', img_id: '1551288049-bbda38a10ad5' },
-  { title: 'UI/UX Design', price: 120000, duration: '8 Weeks', img_id: '1586717791821-3f44a563eb4c' },
+  { title: 'Data Analysis & Virtualization', price: 150000, duration: '8 Weeks', img_id: '1460925895917-afdab827c52f' },
+  { title: 'UI/UX Design', price: 120000, duration: '8 Weeks', img_id: '1561070791322-9b761a09b305' },
   { title: 'WordPress Development', price: 100000, duration: '8 Weeks', img_id: '1461749280684-dccba630e2f6' },
-  { title: 'Microsoft Office Suite', price: 80000, duration: '8 Weeks', img_id: '1497215728101-856f4ea42174' },
-  { title: 'Digital Marketing', price: 120000, duration: '8 Weeks', img_id: '1460925895917-afdab827c52f' }
+  { title: 'Microsoft Office Suite', price: 80000, duration: '8 Weeks', img_id: '1498050108021-c5248f567118' },
+  { title: 'Digital Marketing', price: 120000, duration: '8 Weeks', img_id: '1557838330-3209c73d8bf4' }
 ]
 
 programs_data.each do |data|
@@ -30,7 +30,7 @@ programs_data.each do |data|
   # Attach image
   begin
     unless program.main_image.attached?
-      file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=800")
+      file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=800", "User-Agent" => "Mozilla/5.0")
       program.main_image.attach(io: file, filename: "#{data[:title].parameterize}.jpg", content_type: 'image/jpeg')
     end
   rescue => e
@@ -74,7 +74,7 @@ team_data.each do |data|
     m.bio = data[:bio]
   end
   begin
-    file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=400")
+    file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=400", "User-Agent" => "Mozilla/5.0")
     member.image.attach(io: file, filename: "#{data[:name].parameterize}.jpg", content_type: 'image/jpeg')
   rescue => e
     puts "Could not attach team image: #{e.message}"
@@ -95,7 +95,7 @@ projects_data.each do |data|
     p.client = data[:client]
   end
   begin
-    file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=800")
+    file = URI.open("https://images.unsplash.com/photo-#{data[:img_id]}?auto=format&fit=crop&q=80&w=800", "User-Agent" => "Mozilla/5.0")
     project.main_image.attach(io: file, filename: "#{data[:name].parameterize}.jpg", content_type: 'image/jpeg')
   rescue => e
     puts "Could not attach project image: #{e.message}"
@@ -130,7 +130,7 @@ puts "Partnerships seeded."
     p.slug = "news-item-#{i+1}"
   end
   begin
-    file = URI.open("https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800")
+    file = URI.open("https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800", "User-Agent" => "Mozilla/5.0")
     post.featured_image.attach(io: file, filename: "news-#{i}.jpg", content_type: 'image/jpeg')
   rescue => e
     puts "Could not attach news image: #{e.message}"

@@ -40,7 +40,8 @@ class Admin::ProjectsController < Admin::BaseController
   private
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.find_by(slug: params[:id]) || Project.find_by(id: params[:id])
+    raise ActiveRecord::RecordNotFound if @project.nil?
   end
 
   def project_params

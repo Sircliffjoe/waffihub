@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   has_one_attached :main_image
   has_many_attached :images
 
-  before_validation :generate_slug, if: :name_changed?
+  before_validation :generate_slug
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
@@ -19,6 +19,6 @@ class Project < ApplicationRecord
   private
 
   def generate_slug
-    self.slug = name.parameterize if name.present?
+    self.slug = name.parameterize if slug.blank? && name.present?
   end
 end

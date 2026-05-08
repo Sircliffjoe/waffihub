@@ -2,12 +2,12 @@
 require 'open-uri'
 
 # Create Admin User
-admin = User.find_or_create_by!(email: 'admin@waffihub.ng') do |u|
-  u.password = 'waffii@2020!!'
-  u.password_confirmation = 'waffii@2020!!'
-  u.admin = true
-end
-puts "Admin created: admin@waffihub.ng / waffii@2020!!"
+admin = User.find_or_initialize_by(email: 'admin@waffihub.ng')
+admin.password = 'waffii@2020!!'
+admin.password_confirmation = 'waffii@2020!!'
+admin.admin = true
+admin.save!
+puts "Admin verified/updated: admin@waffihub.ng / waffii@2020!!"
 
 # Programs with Images
 programs_data = [

@@ -1,43 +1,45 @@
 class PaymentsController < ApplicationController
-  before_action :authenticate_user!
-
+  # No login required for checkout anymore
+  
   def new
     if params[:program_id]
       @program = Program.find(params[:program_id])
-      @payment = Payment.new(program: @program, user: current_user, amount: @program.price)
+      @payment = Payment.new(program: @program, amount: @program.price)
     elsif params[:plan_id]
       @plan = Plan.find(params[:plan_id])
-      @payment = Payment.new(plan: @plan, user: current_user, amount: @plan.price)
+      @payment = Payment.new(plan: @plan, amount: @plan.price)
     else
       redirect_to root_path, alert: "No program or plan selected."
+    end
+    
+    # Pre-fill if logged in
+    if user_signed_in?
+      @payment.email = current_user.email
+      # You could add first_name/last_name to User model later if needed
     end
   end
 
   def create
-    if params[:payment][:program_id].present?
-      @program = Program.find(params[:payment][:program_id])
+    payment_params = params.require(:payment).permit(:program_id, :plan_id, :first_name, :last_name, :email, :phone, :address)
+    
+    if payment_params[:program_id].present?
+      @program = Program.find(payment_params[:program_id])
       amount = @program.price
-      plan_id = nil
-      program_id = @program.id
-    elsif params[:payment][:plan_id].present?
-      @plan = Plan.find(params[:payment][:plan_id])
+    elsif payment_params[:plan_id].present?
+      @plan = Plan.find(payment_params[:plan_id])
       amount = @plan.price
-      plan_id = @plan.id
-      program_id = nil
     end
 
-    @payment = current_user.payments.build(
-      program_id: program_id,
-      plan_id: plan_id,
-      amount: amount,
-      status: "pending",
-      transaction_reference: "WP-#{SecureRandom.hex(8).upcase}"
-    )
+    @payment = Payment.new(payment_params)
+    @payment.user = current_user if user_signed_in?
+    @payment.amount = amount
+    @payment.status = "pending"
+    @payment.transaction_reference = "WP-#{SecureRandom.hex(8).upcase}"
 
     if @payment.save
       paystack = ::PaystackService.new
       result = paystack.initialize_transaction(
-        email: current_user.email,
+        email: @payment.email,
         amount: @payment.amount,
         reference: @payment.transaction_reference,
         callback_url: callback_payments_url
@@ -50,7 +52,7 @@ class PaymentsController < ApplicationController
         redirect_to root_path, alert: "Error initializing payment: #{result[:error]}"
       end
     else
-      redirect_to root_path, alert: "Failed to create payment record."
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -65,13 +67,25 @@ class PaymentsController < ApplicationController
       if result[:success]
         @payment.update(status: "success", paystack_reference: result[:data]['reference'])
         
+        guest_data = {
+          first_name: @payment.first_name,
+          last_name: @payment.last_name,
+          email: @payment.email,
+          phone: @payment.phone,
+          address: @payment.address,
+          user: @payment.user
+        }
+
         if @payment.program
-          # Create enrollment for program
-          current_user.enrollments.find_or_create_by(program: @payment.program)
-          redirect_to program_path(@payment.program), notice: "Payment successful! You are now enrolled in #{@payment.program.title}."
+          Enrollment.find_or_create_by!(program: @payment.program, email: @payment.email) do |e|
+            e.assign_attributes(guest_data)
+          end
+          redirect_to program_path(@payment.program), notice: "Payment successful! Your enrollment in #{@payment.program.title} is confirmed."
         elsif @payment.plan
-          # Create booking for plan
-          current_user.bookings.find_or_create_by(plan: @payment.plan, status: "active")
+          Booking.find_or_create_by!(plan: @payment.plan, email: @payment.email) do |b|
+            b.assign_attributes(guest_data)
+            b.status = "active"
+          end
           redirect_to root_path, notice: "Payment successful! Your booking for #{@payment.plan.name} is now active."
         end
       else

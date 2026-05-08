@@ -109,7 +109,7 @@
                     </li>
                   <% end %>
                 </ul>
-                <%= button_to "Book Now", bookings_path(plan_id: plan.id), method: :post, class: "btn #{plan.highlight ? 'btn-primary' : 'btn-outline-primary'} w-100 rounded-pill py-3 fw-bold shadow-sm transition-all" %>
+                <%= link_to "Book Now", new_payment_path(plan_id: plan.id), class: "btn #{plan.highlight ? 'btn-primary' : 'btn-outline-primary'} w-100 rounded-pill py-3 fw-bold shadow-sm transition-all" %>
               </div>
             </div>
           </div>

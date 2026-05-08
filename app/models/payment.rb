@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :program, optional: true
   belongs_to :plan, optional: true
 

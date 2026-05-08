@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_04_170810) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_08_220923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,22 +53,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_170810) do
   end
 
   create_table "bookings", force: :cascade do |t|
+    t.text "address"
     t.datetime "created_at", null: false
+    t.string "email"
     t.date "end_date"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
     t.bigint "plan_id", null: false
     t.date "start_date"
     t.string "status", default: "pending"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["plan_id"], name: "index_bookings_on_plan_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
+    t.text "address"
     t.datetime "created_at", null: false
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
     t.bigint "program_id", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["program_id"], name: "index_enrollments_on_program_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
@@ -97,15 +107,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_170810) do
   end
 
   create_table "payments", force: :cascade do |t|
+    t.text "address"
     t.decimal "amount"
     t.datetime "created_at", null: false
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
     t.string "paystack_reference"
+    t.string "phone"
     t.bigint "plan_id"
     t.bigint "program_id"
     t.string "status"
     t.string "transaction_reference"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["plan_id"], name: "index_payments_on_plan_id"
     t.index ["program_id"], name: "index_payments_on_program_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
@@ -141,9 +156,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_170810) do
   end
 
   create_table "project_applications", force: :cascade do |t|
+    t.text "address"
     t.text "background"
     t.datetime "created_at", null: false
     t.string "email"
+    t.string "first_name"
+    t.string "last_name"
     t.string "location"
     t.string "name"
     t.string "phone"

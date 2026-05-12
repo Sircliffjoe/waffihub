@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def application_params
-    params.require(:project_application).permit(:first_name, :last_name, :email, :phone, :address, :background, :reason)
+    params.require(:project_application).permit(:first_name, :last_name, :email, :phone, :address, :background, :reason, :age_group, :marital_status, :course_track)
   end
 
   def partnership_params

@@ -29,12 +29,27 @@
           <div class="fw-bold"><%= @application.phone %></div>
         </div>
         <div class="col-md-6">
-          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Location</label>
-          <div class="fw-bold"><%= @application.location %></div>
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Age Group</label>
+          <div class="fw-bold"><%= @application.age_group %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Marital Status</label>
+          <div class="fw-bold"><%= @application.marital_status %></div>
+        </div>
+        <div class="col-md-6">
+          <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Course/Track</label>
+          <div class="fw-bold"><%= @application.course_track %></div>
         </div>
         <div class="col-md-6">
           <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-1">Applied Date</label>
           <div class="fw-bold"><%= @application.created_at.strftime("%B %d, %Y at %I:%M %p") %></div>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label class="small text-muted fw-bold text-uppercase ls-wide d-block mb-2">Residential Address</label>
+        <div class="p-4 bg-light rounded-4 text-muted" style="line-height: 1.7;">
+          <%= simple_format @application.address %>
         </div>
       </div>
 

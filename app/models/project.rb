@@ -16,6 +16,21 @@ class Project < ApplicationRecord
     slug
   end
 
+  def tracks_list
+    return [] if tracks.blank?
+    
+    tracks.map do |track|
+      case track
+      when String
+        track
+      when Hash
+        track["title"] || track["name"] || track.values.first
+      else
+        track.to_s
+      end
+    end.compact
+  end
+
   private
 
   def generate_slug

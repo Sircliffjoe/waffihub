@@ -4,7 +4,7 @@
   </div>
   <div class="container position-relative z-1 py-5">
     <h6 class="text-info fw-bold text-uppercase ls-wide mb-3">Participation Application</h6>
-    <h1 class="display-4 fw-bold mb-0">Apply for <%= @project.name %></h1>
+    <h1 class="display-4 fw-bold mb-0 text-white">Apply for <%= @project.name %></h1>
   </div>
 </section>
 
@@ -15,6 +15,18 @@
         <div class="card border-0 shadow-2xl rounded-5 p-5 bg-white" data-aos="fade-up">
           <h3 class="fw-bold mb-4">Your Information</h3>
           <p class="text-muted mb-5">Please fill out the form below to apply for participation in this project. Our team will review your application and get back to you.</p>
+
+          <% if @application.errors.any? %>
+            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+              <h4 class="alert-heading">Please fix the following errors:</h4>
+              <ul class="mb-0">
+                <% @application.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
 
           <%= form_with model: [@project, @application], url: apply_project_path(@project), class: "row g-4" do |f| %>
             <div class="col-md-6">
@@ -32,6 +44,39 @@
             <div class="col-md-6">
               <%= f.label :phone, "Phone Number", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
               <%= f.text_field :phone, class: "form-control form-control-lg border-light shadow-sm rounded-pill px-4 bg-white", placeholder: "e.g., +234...", required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :age_group, "Age Group", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.select :age_group, 
+                  [
+                    ["Select your age group", ""],
+                    ["15-20", "15-20"],
+                    ["21-25", "21-25"],
+                    ["26-30", "26-30"],
+                    ["31-40", "31-40"],
+                    ["41-50", "41-50"],
+                    ["50+", "50+"]
+                  ],
+                  { required: true },
+                  class: "form-control form-control-lg border-light shadow-sm rounded-pill px-4 bg-white" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :marital_status, "Marital Status", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.select :marital_status, 
+                  [
+                    ["Select marital status", ""],
+                    ["Single", "Single"],
+                    ["Married", "Married"]
+                  ],
+                  { required: true },
+                  class: "form-control form-control-lg border-light shadow-sm rounded-pill px-4 bg-white" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :course_track, "Course/Track", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>
+              <%= f.select :course_track, 
+                  (["Select a course/track", ""] + @project.tracks_list.map { |track| [track, track] }),
+                  { required: true },
+                  class: "form-control form-control-lg border-light shadow-sm rounded-pill px-4 bg-white" %>
             </div>
             <div class="col-12">
               <%= f.label :address, "Residential Address", class: "form-label text-muted fw-bold text-uppercase small ls-wide" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_12_142211) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_13_160542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_12_142211) do
     t.bigint "user_id"
     t.index ["plan_id"], name: "index_bookings_on_plan_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.text "body", null: false
+    t.string "contact_type"
+    t.datetime "created_at", null: false
+    t.string "recipient_email", null: false
+    t.string "recipient_name"
+    t.string "status", default: "sent"
+    t.string "subject", null: false
+    t.bigint "user_id"
+    t.index ["recipient_email"], name: "index_emails_on_recipient_email"
+    t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
   create_table "enrollments", force: :cascade do |t|

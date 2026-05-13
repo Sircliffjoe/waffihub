@@ -72,3 +72,9 @@ gem "paystack", "~> 0.1.10"
 gem "dotenv-rails", groups: [:development, :test]
 
 gem "cloudinary", "~> 2.4"
+
+# Brevo email provider
+gem 'brevo'
+
+# Pagination for admin email list
+gem 'will_paginate', '~> 4.0'

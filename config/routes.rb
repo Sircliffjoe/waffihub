@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :inquiries, only: [ :index, :show, :destroy ]
     resources :plans
     resources :partners
+    resources :emails, only: [ :index, :show, :new, :create ]
     resources :project_applications, only: [ :index, :show, :update, :destroy ]
     resources :project_partnerships, only: [ :index, :show, :update, :destroy ]
   end

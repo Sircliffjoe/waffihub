@@ -333,6 +333,11 @@
           <%= link_to admin_inquiries_path, class: "sidebar-link #{'active' if controller_name == 'inquiries'}" do %>
             <i class="bi bi-chat-dots"></i> Community Inbox
           <% end %>
+
+          <div class="nav-group-title">Communications</div>
+          <%= link_to admin_emails_path, class: "sidebar-link #{'active' if controller_name == 'emails'}" do %>
+            <i class="bi bi-envelope-paper"></i> Email Messages
+          <% end %>
         </nav>
 
         <div class="sidebar-user">

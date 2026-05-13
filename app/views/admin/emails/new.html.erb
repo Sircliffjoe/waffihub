@@ -1,0 +1,173 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Send Email</h1>
+  <%= link_to "Back to Emails", admin_emails_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <%= form_with(model: @email, local: true, url: admin_emails_path) do |form| %>
+          <% if @email.errors.any? %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <h4 class="alert-heading"><%= pluralize(@email.errors.count, "error") %> prohibited this email from being saved:</h4>
+              <ul class="mb-0">
+                <% @email.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <div class="mb-4">
+            <div class="alert alert-info">
+              <strong>Recipients Format:</strong>
+              <p class="mb-0">Enter one email per line. You can use the format:</p>
+              <ul class="mb-0 mt-2">
+                <li>email@domain.com</li>
+                <li>John Doe &lt;john@domain.com&gt;</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :recipients, "Recipients", class: "form-label" %>
+            <%= form.textarea :recipients, 
+                placeholder: "name@email.com\nJohn Doe <john@email.com>\njane@email.com",
+                rows: 8,
+                class: "form-control",
+                required: true
+            %>
+            <small class="form-text text-muted">One recipient per line</small>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :contact_type, "Email Type", class: "form-label" %>
+            <%= form.select :contact_type, 
+                options_for_select(@contact_types.map { |type| [type.capitalize, type] }, 'manual'),
+                { include_blank: false },
+                class: "form-select"
+            %>
+            <small class="form-text text-muted">For categorization purposes</small>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :subject, "Subject", class: "form-label" %>
+            <%= form.text_field :subject, 
+                placeholder: "Email subject line",
+                class: "form-control",
+                required: true
+            %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :body, "Message Body", class: "form-label" %>
+            <%= form.textarea :body,
+                placeholder: "Enter your email message here...",
+                rows: 10,
+                class: "form-control",
+                required: true
+            %>
+            <small class="form-text text-muted">Support for plain text</small>
+          </div>
+
+          <div class="d-flex gap-2">
+            <%= form.submit "Send Email", class: "btn btn-primary btn-lg" %>
+            <%= link_to "Cancel", admin_emails_path, class: "btn btn-outline-secondary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-light">
+        <h5 class="mb-0">Quick Actions</h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <h6>Email All Users</h6>
+          <button type="button" class="btn btn-sm btn-outline-primary w-100" onclick="fillAllUsers()">
+            Add All Users
+          </button>
+        </div>
+        <div class="mb-3">
+          <h6>Email Application Applicants</h6>
+          <button type="button" class="btn btn-sm btn-outline-primary w-100" onclick="fillApplicationApplicants()">
+            Add Applicants
+          </button>
+        </div>
+        <div class="mb-3">
+          <h6>Email Enrolled Users</h6>
+          <button type="button" class="btn btn-sm btn-outline-primary w-100" onclick="fillEnrolledUsers()">
+            Add Enrolled Users
+          </button>
+        </div>
+        <div class="mb-3">
+          <h6>Email Bookers</h6>
+          <button type="button" class="btn btn-sm btn-outline-primary w-100" onclick="fillBookers()">
+            Add Bookers
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mt-3">
+      <div class="card-header bg-light">
+        <h5 class="mb-0">Tips</h5>
+      </div>
+      <div class="card-body small">
+        <ul class="mb-0">
+          <li>Check email addresses before sending</li>
+          <li>Keep subject lines concise</li>
+          <li>Test with yourself first</li>
+          <li>All emails are logged for records</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function fillAllUsers() {
+    const textarea = document.getElementById('email_recipients');
+    const emails = [
+      <% User.pluck(:email).each do |email| %>
+        '<%= email %>',
+      <% end %>
+    ];
+    textarea.value = emails.join('\n');
+  }
+
+  function fillApplicationApplicants() {
+    const textarea = document.getElementById('email_recipients');
+    const emails = [
+      <% ProjectApplication.distinct.pluck(:email).each do |email| %>
+        '<%= email %>',
+      <% end %>
+    ];
+    textarea.value = emails.join('\n');
+  }
+
+  function fillEnrolledUsers() {
+    const textarea = document.getElementById('email_recipients');
+    const emails = [
+      <% Enrollment.distinct.pluck(:email).each do |email| %>
+        '<%= email %>',
+      <% end %>
+    ];
+    textarea.value = emails.join('\n');
+  }
+
+  function fillBookers() {
+    const textarea = document.getElementById('email_recipients');
+    const emails = [
+      <% Booking.distinct.pluck(:email).each do |email| %>
+        '<%= email %>',
+      <% end %>
+    ];
+    textarea.value = emails.join('\n');
+  }
+</script>

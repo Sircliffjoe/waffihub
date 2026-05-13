@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Email Messages</h1>
+  <%= link_to "Send Email", new_admin_email_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr>
+          <th>Recipient</th>
+          <th>Subject</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Sent On</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @emails.each do |email| %>
+          <tr>
+            <td>
+              <div class="fw-bold"><%= email.recipient_name %></div>
+              <div class="text-muted small"><%= email.recipient_email %></div>
+            </td>
+            <td><%= truncate(email.subject, length: 50) %></td>
+            <td>
+              <span class="badge bg-info text-dark">
+                <%= email.contact_type.capitalize %>
+              </span>
+            </td>
+            <td>
+              <% if email.sent? %>
+                <span class="badge bg-success">Sent</span>
+              <% elsif email.pending? %>
+                <span class="badge bg-warning">Pending</span>
+              <% elsif email.failed? %>
+                <span class="badge bg-danger">Failed</span>
+              <% end %>
+            </td>
+            <td><%= email.created_at.strftime("%B %d, %Y %H:%M") %></td>
+            <td class="text-end">
+              <%= link_to "View", admin_email_path(email), class: "btn btn-outline-info btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <% if @emails.any? %>
+    <div class="card-footer bg-light d-flex justify-content-center">
+      <%= will_paginate @emails %>
+    </div>
+  <% else %>
+    <div class="card-body text-center text-muted py-5">
+      <p>No emails sent yet.</p>
+    </div>
+  <% end %>
+</div>

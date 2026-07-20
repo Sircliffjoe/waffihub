@@ -1,0 +1,98 @@
+<section class="py-5 bg-light" style="margin-top: 76px;">
+  <div class="container py-5 text-center">
+    <h1 class="display-4 fw-bold mb-3">Our Events</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+      Join us for workshops, hackathons, and networking sessions designed to elevate your skills and career.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <% if @upcoming_events.any? %>
+      <h3 class="fw-bold mb-4">Upcoming Events</h3>
+      <div class="row g-4 mb-5">
+        <% @upcoming_events.each do |event| %>
+          <div class="col-md-6" data-aos="fade-up">
+            <div class="card h-100 border-0 shadow-sm rounded-4 bg-white" style="border-left: 6px solid <%= event.border_color.presence || '#6366f1' %> !important;">
+              <div class="card-body p-4 p-md-5">
+                <span class="badge rounded-pill mb-3 px-3 py-2 fw-bold" style="background-color: <%= event.border_color.presence || '#6366f1' %>; color: #fff;">
+                  <%= event.category %>
+                </span>
+                <h3 class="h4 fw-bold mb-4 text-dark">
+                  <%= link_to event.title, event_path(event), class: "text-decoration-none text-dark hover-primary" %>
+                </h3>
+                
+                <ul class="list-unstyled mb-4">
+                  <li class="mb-2 text-muted small fw-medium d-flex align-items-center">
+                    <i class="bi bi-calendar3 me-3 fs-5 opacity-75"></i>
+                    <%= event.start_time&.strftime("%B %-d, %Y") || "TBA" %>
+                    <% if event.end_time && event.end_time.to_date != event.start_time&.to_date %>
+                      - <%= event.end_time.strftime("%B %-d, %Y") %>
+                    <% end %>
+                  </li>
+                  <li class="mb-2 text-muted small fw-medium d-flex align-items-center">
+                    <i class="bi bi-clock me-3 fs-5 opacity-75"></i>
+                    <%= event.start_time&.strftime("%I:%M %p") || "TBA" %>
+                    <% if event.end_time && event.end_time.to_date == event.start_time&.to_date %>
+                      - <%= event.end_time.strftime("%I:%M %p") %>
+                    <% end %>
+                  </li>
+                  <li class="text-muted small fw-medium d-flex align-items-center">
+                    <i class="bi bi-geo-alt me-3 fs-5 opacity-75"></i>
+                    <%= event.location.presence || "TBA" %>
+                  </li>
+                </ul>
+                
+                <div class="d-flex align-items-center gap-3 mt-4">
+                  <%= link_to "View Details", event_path(event), class: "btn btn-outline-dark rounded-pill px-4 small fw-bold" %>
+                  <% if event.google_calendar_link.present? %>
+                    <a href="<%= event.google_calendar_link %>" target="_blank" class="text-decoration-none fw-bold small" style="color: <%= event.border_color.presence || '#6366f1' %>;">
+                      <i class="bi bi-calendar-plus me-1"></i> Add to Calendar
+                    </a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-5 bg-light rounded-4 mb-5">
+        <i class="bi bi-calendar-x display-4 text-muted mb-3 d-block"></i>
+        <h4 class="fw-bold text-dark">No upcoming events</h4>
+        <p class="text-muted mb-0">Stay tuned for new events coming soon!</p>
+      </div>
+    <% end %>
+
+    <% if @past_events.any? %>
+      <h3 class="fw-bold mb-4">Past Events</h3>
+      <div class="row g-4">
+        <% @past_events.each do |event| %>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card h-100 border rounded-4 bg-light shadow-sm grayscale-hover">
+              <div class="card-body p-4">
+                <span class="badge bg-secondary mb-3"><%= event.category %></span>
+                <h4 class="fw-bold mb-3 h5 text-dark"><%= event.title %></h4>
+                <p class="text-muted small mb-0"><i class="bi bi-calendar me-2"></i><%= event.start_time&.strftime("%B %-d, %Y") %></p>
+                <div class="mt-3">
+                  <%= link_to "Event Recap", event_path(event), class: "small fw-bold text-decoration-none" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<style>
+  .grayscale-hover {
+    transition: all 0.3s ease;
+  }
+  .grayscale-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+</style>

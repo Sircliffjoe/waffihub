@@ -308,11 +308,17 @@
           <% end %>
 
           <div class="nav-group-title">Content HUB</div>
+          <%= link_to admin_events_path, class: "sidebar-link #{'active' if controller_name == 'events'}" do %>
+            <i class="bi bi-calendar-event"></i> Upcoming Events
+          <% end %>
           <%= link_to admin_posts_path, class: "sidebar-link #{'active' if controller_name == 'posts'}" do %>
             <i class="bi bi-newspaper"></i> News & Insights
           <% end %>
           <%= link_to admin_projects_path, class: "sidebar-link #{'active' if controller_name == 'projects'}" do %>
             <i class="bi bi-kanban"></i> Projects
+          <% end %>
+          <%= link_to admin_gallery_images_path, class: "sidebar-link #{'active' if controller_name == 'gallery_images'}" do %>
+            <i class="bi bi-images"></i> Gallery
           <% end %>
 
           <div class="nav-group-title">Project Submissions</div>

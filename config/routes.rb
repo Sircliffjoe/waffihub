@@ -27,18 +27,22 @@ Rails.application.routes.draw do
     resources :emails, only: [ :index, :show, :new, :create ]
     resources :project_applications, only: [ :index, :show, :update, :destroy ]
     resources :project_partnerships, only: [ :index, :show, :update, :destroy ]
+    resources :events
+    resources :gallery_images
   end
 
   # Public Routes
   root to: "pages#home"
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
+  get "gallery", to: "galleries#index"
 
   resources :programs, only: [ :index, :show ] do
     member do
       post :enroll
     end
   end
+  resources :events, only: [ :index, :show ]
   resources :services, only: [ :index, :show ]
   resources :posts, only: [ :index, :show ], path: "news"
   resources :projects, only: [ :index ], path: "our-work"

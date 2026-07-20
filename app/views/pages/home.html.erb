@@ -254,6 +254,118 @@
   </div>
 </section>
 
+<%# Upcoming Events Section %>
+<section class="py-8 bg-light overflow-hidden">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end" style="margin-bottom: 40px;" data-aos="fade-up">
+      <div>
+        <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Events</h6>
+        <h2 class="display-5 fw-bold mb-0">Upcoming Events</h2>
+      </div>
+      <%= link_to "View All Events →", events_path, class: "btn btn-primary rounded-pill px-4 py-2 fw-bold transition-all shadow-sm" %>
+    </div>
+
+    <div class="row g-4">
+      <% @upcoming_events.each_with_index do |event, i| %>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-sm rounded-4 bg-white" style="border-left: 6px solid <%= event.border_color.presence || '#6366f1' %> !important;">
+            <div class="card-body p-4 p-md-5">
+              <span class="badge rounded-pill mb-3 px-3 py-2 fw-bold" style="background-color: <%= event.border_color.presence || '#6366f1' %>; color: #fff;">
+                <%= event.category %>
+              </span>
+              <h3 class="h4 fw-bold mb-4 text-dark"><%= event.title %></h3>
+              
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2 text-muted small fw-medium d-flex align-items-center">
+                  <i class="bi bi-calendar3 me-3 fs-5 opacity-75"></i>
+                  <%= event.start_time&.strftime("%B %-d, %Y") || "TBA" %>
+                  <% if event.end_time && event.end_time.to_date != event.start_time&.to_date %>
+                    - <%= event.end_time.strftime("%B %-d, %Y") %>
+                  <% end %>
+                </li>
+                <li class="mb-2 text-muted small fw-medium d-flex align-items-center">
+                  <i class="bi bi-clock me-3 fs-5 opacity-75"></i>
+                  <%= event.start_time&.strftime("%I:%M %p") || "TBA" %>
+                  <% if event.end_time && event.end_time.to_date == event.start_time&.to_date %>
+                    - <%= event.end_time.strftime("%I:%M %p") %>
+                  <% end %>
+                </li>
+                <li class="text-muted small fw-medium d-flex align-items-center">
+                  <i class="bi bi-geo-alt me-3 fs-5 opacity-75"></i>
+                  <%= event.location.presence || "TBA" %>
+                </li>
+              </ul>
+              
+              <% if event.google_calendar_link.present? %>
+                <a href="<%= event.google_calendar_link %>" target="_blank" class="text-decoration-none fw-bold small" style="color: <%= event.border_color.presence || '#6366f1' %>;">
+                  <i class="bi bi-calendar-plus me-1"></i> Add to Google Calendar
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if @upcoming_events.empty? %>
+        <div class="col-12 text-center py-5">
+          <div class="p-5 bg-white rounded-4 shadow-sm border-0">
+            <i class="bi bi-calendar-x display-4 text-muted mb-3 d-block"></i>
+            <h4 class="fw-bold text-dark">No events scheduled right now.</h4>
+            <p class="text-muted mb-0">Check back later for exciting upcoming events!</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# Notable Projects Section %>
+<section class="py-8 bg-white overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-7" data-aos="fade-up">
+      <h6 class="text-primary-custom fw-bold text-uppercase ls-wide mb-2">Impact</h6>
+      <h2 class="display-5 fw-bold mb-3">Notable Projects</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">Some notable projects we've been part of to drive innovation and community development.</p>
+    </div>
+
+    <div class="row g-4">
+      <% @notable_projects.each_with_index do |project, i| %>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-hover">
+            <% if project.main_image.attached? %>
+              <%= image_tag project.main_image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <div class="bg-light d-flex align-items-center justify-content-center text-muted" style="height: 200px;">
+                <i class="bi bi-kanban display-4 opacity-25"></i>
+              </div>
+            <% end %>
+            <div class="card-body p-4">
+              <% if project.client.present? %>
+                <div class="text-primary-custom fw-bold small text-uppercase ls-wide mb-2"><%= project.client %></div>
+              <% end %>
+              <h4 class="fw-bold mb-3"><%= project.name %></h4>
+              <p class="text-muted small mb-0"><%= truncate(project.hero_description.presence || strip_tags(project.problem.to_s), length: 120) %></p>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-4 pt-0">
+              <%= link_to "View Project →", project_path(project), class: "fw-bold small text-decoration-none text-dark hover-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if @notable_projects.empty? %>
+        <div class="col-12 text-center py-4">
+           <p class="text-muted">More projects coming soon.</p>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="text-center mt-5" data-aos="fade-up">
+      <%= link_to "View All Our Work", projects_path, class: "btn btn-outline-dark rounded-pill px-5 py-3 fw-bold transition-all" %>
+    </div>
+  </div>
+</section>
+
 <%# Latest News Section %>
 <section class="py-8 bg-white overflow-hidden">
   <div class="container">

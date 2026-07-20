@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  category: MyString
+  start_time: 2026-07-13 10:44:44
+  end_time: 2026-07-13 10:44:44
+  location: MyString
+  google_calendar_link: MyString
+  border_color: MyString
+
+two:
+  title: MyString
+  category: MyString
+  start_time: 2026-07-13 10:44:44
+  end_time: 2026-07-13 10:44:44
+  location: MyString
+  google_calendar_link: MyString
+  border_color: MyString

@@ -1,0 +1,100 @@
+<section class="py-5 bg-light" style="margin-top: 76px; border-bottom: 5px solid <%= @event.border_color.presence || '#6366f1' %>;">
+  <div class="container py-4">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <span class="badge rounded-pill mb-3 px-3 py-2 fw-bold shadow-sm" style="background-color: <%= @event.border_color.presence || '#6366f1' %>; color: #fff;">
+          <%= @event.category %>
+        </span>
+        <h1 class="display-5 fw-bold mb-3"><%= @event.title %></h1>
+        
+        <div class="d-flex flex-wrap gap-4 text-muted mt-4">
+          <div class="d-flex align-items-center">
+            <div class="icon-box-sm bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+              <i class="bi bi-calendar3 text-primary-custom"></i>
+            </div>
+            <div>
+              <div class="small fw-bold text-uppercase ls-wide opacity-50" style="font-size: 0.65rem;">Date</div>
+              <div class="fw-bold text-dark">
+                <%= @event.start_time&.strftime("%B %-d, %Y") %>
+                <% if @event.end_time && @event.end_time.to_date != @event.start_time&.to_date %>
+                  - <%= @event.end_time.strftime("%B %-d, %Y") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-flex align-items-center">
+            <div class="icon-box-sm bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+              <i class="bi bi-clock text-primary-custom"></i>
+            </div>
+            <div>
+              <div class="small fw-bold text-uppercase ls-wide opacity-50" style="font-size: 0.65rem;">Time</div>
+              <div class="fw-bold text-dark">
+                <%= @event.start_time&.strftime("%I:%M %p") %>
+                <% if @event.end_time && @event.end_time.to_date == @event.start_time&.to_date %>
+                  - <%= @event.end_time.strftime("%I:%M %p") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="icon-box-sm bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+              <i class="bi bi-geo-alt text-primary-custom"></i>
+            </div>
+            <div>
+              <div class="small fw-bold text-uppercase ls-wide opacity-50" style="font-size: 0.65rem;">Location</div>
+              <div class="fw-bold text-dark"><%= @event.location.presence || "TBA" %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+        <% if @event.google_calendar_link.present? %>
+          <a href="<%= @event.google_calendar_link %>" target="_blank" class="btn btn-lg rounded-pill px-5 fw-bold shadow-sm" style="background-color: <%= @event.border_color.presence || '#6366f1' %>; color: #fff; border: none;">
+            <i class="bi bi-calendar-plus me-2"></i> Add to Calendar
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <% if @event.description.present? %>
+          <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 mb-5 bg-light">
+            <h4 class="fw-bold mb-4">About this Event</h4>
+            <div class="trix-content">
+              <%= @event.description %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="d-flex justify-content-between align-items-center border-top pt-4">
+          <%= link_to "← Back to Events", events_path, class: "text-decoration-none fw-bold text-muted hover-primary" %>
+          
+          <div class="d-flex gap-2">
+            <span class="text-muted small fw-bold me-2 align-self-center">Share:</span>
+            <a href="https://twitter.com/intent/tweet?text=<%= CGI.escape(@event.title) %>&url=<%= CGI.escape(event_url(@event)) %>" target="_blank" class="btn btn-sm btn-light rounded-circle text-muted shadow-sm">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<%= CGI.escape(event_url(@event)) %>" target="_blank" class="btn btn-sm btn-light rounded-circle text-muted shadow-sm">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= CGI.escape(event_url(@event)) %>&title=<%= CGI.escape(@event.title) %>" target="_blank" class="btn btn-sm btn-light rounded-circle text-muted shadow-sm">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

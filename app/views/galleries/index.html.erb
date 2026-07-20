@@ -1,0 +1,53 @@
+<section class="py-5 bg-light" style="margin-top: 76px;">
+  <div class="container py-5 text-center">
+    <h1 class="display-4 fw-bold mb-3">Photo Gallery</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+      A visual journey of our programs, partnerships, and the vibrant community at WaffiHub.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4" data-masonry='{"percentPosition": true }'>
+      <% @gallery_images.each do |gi| %>
+        <div class="col-sm-6 col-lg-4 mb-4">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative group-hover">
+            <% if gi.image.attached? %>
+              <%= image_tag gi.image, class: "w-100 h-auto" %>
+              <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 opacity-0 transition-opacity d-flex align-items-center justify-content-center hover-opacity-100" style="transition: opacity 0.3s ease;">
+                <div class="text-white text-center p-4">
+                  <h5 class="fw-bold mb-2"><%= gi.title %></h5>
+                  <% if gi.category.present? %>
+                    <span class="badge bg-primary-custom mb-2"><%= gi.category %></span>
+                  <% end %>
+                  <p class="small text-white-50 mb-0"><%= gi.event_date&.strftime("%B %Y") %></p>
+                </div>
+              </div>
+            <% else %>
+               <div class="bg-light p-5 text-center text-muted">No Image</div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if @gallery_images.empty? %>
+        <div class="col-12 text-center py-5">
+           <p class="text-muted lead">Gallery is currently being updated. Check back soon!</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hover-opacity-100:hover {
+    opacity: 1 !important;
+  }
+  .transition-opacity {
+    transition: opacity 0.3s ease;
+  }
+</style>
+
+<!-- Add Masonry JS for beautiful grid layout -->
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>

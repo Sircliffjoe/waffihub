@@ -1,0 +1,59 @@
+<%= form_with(model: [:admin, gallery_image], class: "row g-4") do |f| %>
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5">
+      <div class="row g-4">
+        <div class="col-12">
+          <%= f.label :image, "Photo", class: "form-label fw-bold text-muted text-uppercase small ls-wide d-block" %>
+          <div class="p-4 bg-light rounded-4 border-2 border-dashed text-center">
+            <% if gallery_image.image.attached? %>
+              <div class="mb-3">
+                <%= image_tag gallery_image.image, class: "img-fluid rounded border shadow-sm", style: "max-height: 200px;" %>
+              </div>
+            <% end %>
+            <%= f.file_field :image, class: "form-control border-0 bg-white rounded-pill", accept: 'image/*' %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :title, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :title, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "e.g. Visit of US Embassy Officials", required: true %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :description, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_area :description, class: "form-control border-0 bg-light rounded-4 px-4 py-3", rows: 3, placeholder: "Brief description of the event or photo..." %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :category, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :category, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "e.g. Visit, Program, Facility" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :event_date, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.date_field :event_date, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 d-flex gap-3">
+      <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg" %>
+      <%= link_to "Cancel", admin_gallery_images_path, class: "btn btn-outline-secondary btn-lg rounded-pill px-5" %>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 bg-primary-custom text-white">
+      <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb me-2"></i> Quick Tips</h5>
+      <ul class="list-unstyled small mb-0 opacity-75">
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> High quality images build trust.</li>
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> Providing a date helps sort the gallery sequentially.</li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<style>
+  .border-dashed { border-style: dashed !important; }
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

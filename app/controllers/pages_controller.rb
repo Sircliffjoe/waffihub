@@ -6,6 +6,8 @@ class PagesController < ApplicationController
     @latest_posts = Post.limit(3).order(published_at: :desc)
     @plans = Plan.all.order(price: :asc)
     @partners = Partner.all.order(position: :asc)
+    @upcoming_events = Event.where('start_time >= ?', Time.current).order(start_time: :asc).limit(4)
+    @notable_projects = Project.limit(6).order(created_at: :desc)
   end
 
   def about

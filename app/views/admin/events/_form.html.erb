@@ -1,0 +1,68 @@
+<%= form_with(model: [:admin, event], class: "row g-4") do |f| %>
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5">
+      <div class="row g-4">
+        <div class="col-12">
+          <%= f.label :title, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :title, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "e.g. AI & Machine Learning Masterclass", required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :category, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :category, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "e.g. Workshop" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :border_color, "Card Border Color", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.color_field :border_color, class: "form-control form-control-color border-0 bg-light rounded-pill w-100", value: event.border_color.presence || "#6f42c1" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :start_time, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.datetime_field :start_time, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :end_time, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.datetime_field :end_time, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4" %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :location, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.text_field :location, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "e.g. Warri Tech Hub, Main Hall" %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :description, "Event Description", class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <div class="bg-light rounded-4 p-2">
+            <%= f.rich_text_area :description, class: "form-control border-0 bg-transparent", style: "min-height: 200px;" %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :google_calendar_link, class: "form-label fw-bold text-muted text-uppercase small ls-wide" %>
+          <%= f.url_field :google_calendar_link, class: "form-control form-control-lg border-0 bg-light rounded-pill px-4", placeholder: "https://calendar.google.com/..." %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 d-flex gap-3">
+      <%= f.submit class: "btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg" %>
+      <%= link_to "Cancel", admin_events_path, class: "btn btn-outline-secondary btn-lg rounded-pill px-5" %>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-4 p-4 bg-primary-custom text-white">
+      <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb me-2"></i> Design Tips</h5>
+      <ul class="list-unstyled small mb-0 opacity-75">
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> Use varied colors (purple, teal, pink, yellow) for visual distinction.</li>
+        <li class="mb-3"><i class="bi bi-check2-circle me-2"></i> The category text is displayed as a badge.</li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<style>
+  .ls-wide { letter-spacing: 0.1em; }
+</style>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_13_160542) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_13_154610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -94,6 +94,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_13_160542) do
     t.bigint "user_id"
     t.index ["program_id"], name: "index_enrollments_on_program_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "border_color"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.datetime "end_time"
+    t.string "google_calendar_link"
+    t.string "location"
+    t.datetime "start_time"
+    t.string "title"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gallery_images", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.date "event_date"
+    t.string "title"
+    t.datetime "updated_at", null: false
   end
 
   create_table "inquiries", force: :cascade do |t|
